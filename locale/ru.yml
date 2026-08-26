@@ -1,0 +1,30 @@
+stezkoy-time-of-magic:
+  admin:
+    title: Time of Magic
+    description: Добавляет немного магии на ваш сайт Flarum.
+    progress_bar_label: Прогресс-бар
+    progress_bar_description: Полоса прогресса под шапкой при прокрутке страницы.
+    back_to_top_label: Кнопка «Наверх»
+    back_to_top_description: Плавающая кнопка для быстрого возврата наверх.
+    back_to_top_shape_label: Квадратная форма
+    back_to_top_shape_description: Использовать квадратную форму вместо круга.
+    back_to_top_icon_label: Класс иконки FontAwesome
+    snow_label: Падающий снег
+    snow_description: Добавляет праздничный эффект падающего снега на весь сайт.
+    snow_density_label: Плотность снега
+    snow_density_light: Лёгкий
+    snow_density_medium: Средний
+    snow_density_heavy: Плотный
+    snow_density_description: Количество снежинок на экране.
+    scrollbar_label: Стильный скроллбар
+    scrollbar_description: Заменяет стандартный скроллбар на тонкий в цветах сайта.
+    swap_layout_label: Поменять местами сайдбар и контент
+    swap_layout_description: Перемещает сайдбар вправо, а посты — влево.
+    background_label: Фоновый паттерн
+    background_none: Нет
+    background_dots: Точки
+    background_grid: Сетка
+    background_diagonal: Диагональные линии
+    background_waves: Волны
+    background_hexagon: Гексагоны
+    background_description: Лёгкий фоновый паттерн, работает на светлых и тёмных темах.

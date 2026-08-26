@@ -1,0 +1,32 @@
+{
+  "name": "stezkoy/flarum-time-of-magic",
+  "version": "1.0.0",
+  "description": "Adds a touch of magic to your Flarum site",
+  "type": "flarum-extension",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Stezkoy",
+      "email": "stezko@gmail.com"
+    }
+  ],
+  "require": {
+    "flarum/core": "^2.0",
+    "php": "^8.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "Stezkoy\\FlarumTimeOfMagic\\": "src/"
+    }
+  },
+  "extra": {
+    "flarum-extension": {
+      "title": "Time of Magic",
+      "category": "feature",
+      "icon": {
+        "image": "icon.svg",
+        "backgroundColor": "#b58d5d"
+      }
+    }
+  }
+}

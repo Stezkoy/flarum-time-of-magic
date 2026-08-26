@@ -1,0 +1,14 @@
+{
+  "name": "flarum-time-of-magic",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "webpack --mode development --watch",
+    "build": "webpack --mode production"
+  },
+  "devDependencies": {
+    "flarum-webpack-config": "^3.0.4",
+    "webpack": "^5",
+    "webpack-cli": "^7.2.2"
+  }
+}

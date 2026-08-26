@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" role="img" aria-label="Time of Magic">
+  <title>Time of Magic</title>
+
+  <!-- Background circle -->
+  <circle cx="24" cy="24" r="22" fill="#2D1B69"/>
+  <circle cx="24" cy="24" r="20" fill="#3D2B7A"/>
+
+  <!-- Hourglass body -->
+  <g transform="translate(24 24)">
+    <!-- Hourglass outline -->
+    <path d="M-7 -14 L7 -14 L1.5 -2 L-1.5 -2 Z" fill="#C9A227" opacity="0.9"/>
+    <path d="M-1.5 2 L1.5 2 L7 14 L-7 14 Z" fill="#C9A227" opacity="0.9"/>
+
+    <!-- Top sand -->
+    <path d="M-5.5 -12 L5.5 -12 L0.8 -2.5 L-0.8 -2.5 Z" fill="#FFD93D"/>
+
+    <!-- Bottom sand -->
+    <path d="M-0.8 2.5 L0.8 2.5 L5.5 12 L-5.5 12 Z" fill="#FFD93D"/>
+
+    <!-- Sand falling -->
+    <line x1="0" y1="-2.5" x2="0" y2="2.5" stroke="#FFD93D" stroke-width="1" stroke-linecap="round" opacity="0.7"/>
+
+    <!-- Hourglass frame top -->
+    <line x1="-7" y1="-14" x2="7" y2="-14" stroke="#FFC94B" stroke-width="1.5" stroke-linecap="round"/>
+    <!-- Hourglass frame bottom -->
+    <line x1="-7" y1="14" x2="7" y2="14" stroke="#FFC94B" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- Sparkle stars -->
+  <!-- Top left -->
+  <g transform="translate(8 10) scale(0.9)">
+    <path d="M0 -2 L0.5 -0.5 L2 0 L0.5 0.5 L0 2 L-0.5 0.5 L-2 0 L-0.5 -0.5 Z" fill="#FFC94B"/>
+  </g>
+  <!-- Top right -->
+  <g transform="translate(38 8) scale(0.7)">
+    <path d="M0 -2 L0.5 -0.5 L2 0 L0.5 0.5 L0 2 L-0.5 0.5 L-2 0 L-0.5 -0.5 Z" fill="#FFC94B"/>
+  </g>
+  <!-- Bottom left -->
+  <g transform="translate(10 40) scale(0.6)">
+    <path d="M0 -2 L0.5 -0.5 L2 0 L0.5 0.5 L0 2 L-0.5 0.5 L-2 0 L-0.5 -0.5 Z" fill="#FFC94B"/>
+  </g>
+  <!-- Bottom right -->
+  <g transform="translate(40 38) scale(0.8)">
+    <path d="M0 -2 L0.5 -0.5 L2 0 L0.5 0.5 L0 2 L-0.5 0.5 L-2 0 L-0.5 -0.5 Z" fill="#FFC94B"/>
+  </g>
+  <!-- Middle left small -->
+  <g transform="translate(6 26) scale(0.5)">
+    <path d="M0 -2 L0.5 -0.5 L2 0 L0.5 0.5 L0 2 L-0.5 0.5 L-2 0 L-0.5 -0.5 Z" fill="#E8B84B"/>
+  </g>
+  <!-- Middle right small -->
+  <g transform="translate(42 24) scale(0.5)">
+    <path d="M0 -2 L0.5 -0.5 L2 0 L0.5 0.5 L0 2 L-0.5 0.5 L-2 0 L-0.5 -0.5 Z" fill="#E8B84B"/>
+  </g>
+
+  <!-- Magic wand sparkle trail -->
+  <circle cx="16" cy="16" r="1" fill="#FFC94B" opacity="0.6"/>
+  <circle cx="32" cy="14" r="0.8" fill="#FFC94B" opacity="0.4"/>
+  <circle cx="14" cy="34" r="0.7" fill="#FFC94B" opacity="0.5"/>
+  <circle cx="34" cy="32" r="0.9" fill="#FFC94B" opacity="0.5"/>
+</svg>

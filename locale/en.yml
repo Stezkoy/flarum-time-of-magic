@@ -1,0 +1,30 @@
+stezkoy-time-of-magic:
+  admin:
+    title: Time of Magic
+    description: Adds a touch of magic to your Flarum site.
+    progress_bar_label: Progress bar
+    progress_bar_description: Shows a thin progress bar below the header while scrolling.
+    back_to_top_label: Back to top button
+    back_to_top_description: Shows a floating button to scroll back to top.
+    back_to_top_shape_label: Square shape
+    back_to_top_shape_description: Use square shape instead of circle.
+    back_to_top_icon_label: FontAwesome icon class
+    snow_label: Falling snow
+    snow_description: Adds a festive falling snow effect across the site.
+    snow_density_label: Snow density
+    snow_density_light: Light
+    snow_density_medium: Medium
+    snow_density_heavy: Heavy
+    snow_density_description: Number of snowflakes on screen.
+    scrollbar_label: Custom scrollbar
+    scrollbar_description: Replaces the default scrollbar with a thin themed one.
+    swap_layout_label: Swap sidebar and content
+    swap_layout_description: Moves the sidebar to the right and posts to the left.
+    background_label: Background pattern
+    background_none: None
+    background_dots: Dots
+    background_grid: Grid
+    background_diagonal: Diagonal lines
+    background_waves: Waves
+    background_hexagon: Hexagons
+    background_description: Subtle background pattern that works on both light and dark themes.
