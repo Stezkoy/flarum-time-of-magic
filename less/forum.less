@@ -1,10 +1,17 @@
+html {
+  --timeofmagic-accent-bar: var(--button-primary-bg);
+  --timeofmagic-accent-top: var(--button-bg);
+  --timeofmagic-accent-scrollbar: var(--button-primary-bg);
+  --timeofmagic-accent-spark: var(--button-primary-bg);
+}
+
 #scroll-progress-bar {
   position: fixed;
   top: 49px;
   left: 0;
   height: 3px;
   width: 0%;
-  background-color: var(--button-primary-bg);
+  background-color: var(--timeofmagic-accent-bar);
   z-index: 1049;
   transition: width 0.1s ease-out;
 }
@@ -24,8 +31,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--button-color);
-  background: var(--button-bg);
+  --top-bg: var(--timeofmagic-accent-top);
+  color: #fff;
+  background: var(--top-bg);
   cursor: pointer;
   opacity: 0;
   visibility: hidden;
@@ -47,6 +55,12 @@
   }
 }
 
+@supports (color: color-mix(in srgb, black 50%, var(--top-bg))) {
+  #back-to-top {
+    color: color-mix(in srgb, var(--top-bg) 12%, #fff);
+  }
+}
+
 .back-to-top--circle {
   border-radius: 50%;
 }
@@ -65,18 +79,18 @@
   }
 }
 
-@keyframes stezkoy-snow-fall {
+@keyframes timeofmagic-snow-fall {
   0% { top: -10%; }
   100% { top: 100%; }
 }
 
-@keyframes stezkoy-snow-shake {
+@keyframes timeofmagic-snow-shake {
   0% { transform: translateX(0); }
   50% { transform: translateX(60px); }
   100% { transform: translateX(0); }
 }
 
-#stezkoy-snow {
+#timeofmagic-snow {
   position: fixed;
   top: 0;
   left: 0;
@@ -87,7 +101,7 @@
   overflow: hidden;
 }
 
-.stezkoy-snowflake {
+.timeofmagic-snowflake {
   position: fixed;
   top: -10%;
   color: #d0d8e0;
@@ -96,18 +110,18 @@
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
   user-select: none;
   pointer-events: none;
-  animation-name: stezkoy-snow-fall, stezkoy-snow-shake;
+  animation-name: timeofmagic-snow-fall, timeofmagic-snow-shake;
   animation-timing-function: linear, ease-in-out;
   animation-iteration-count: infinite, infinite;
 }
 
-body.stezkoy-bg-dots {
+body.timeofmagic-bg-dots {
   background-image: radial-gradient(circle, rgba(128, 128, 128, 0.12) 1px, transparent 1px) !important;
   background-size: 20px 20px !important;
   background-attachment: fixed !important;
 }
 
-body.stezkoy-bg-grid {
+body.timeofmagic-bg-grid {
   background-image:
     linear-gradient(rgba(128, 128, 128, 0.08) 1px, transparent 1px),
     linear-gradient(90deg, rgba(128, 128, 128, 0.08) 1px, transparent 1px) !important;
@@ -115,7 +129,7 @@ body.stezkoy-bg-grid {
   background-attachment: fixed !important;
 }
 
-body.stezkoy-bg-diagonal {
+body.timeofmagic-bg-diagonal {
   background-image: repeating-linear-gradient(
     45deg,
     transparent,
@@ -126,48 +140,85 @@ body.stezkoy-bg-diagonal {
   background-attachment: fixed !important;
 }
 
-body.stezkoy-bg-waves {
+body.timeofmagic-bg-waves {
   background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 30 Q15 20 30 30 T60 30' fill='none' stroke='rgba(128,128,128,0.1)' stroke-width='1'/%3E%3C/svg%3E") !important;
   background-size: 60px 60px !important;
   background-attachment: fixed !important;
 }
 
-body.stezkoy-bg-hexagon {
+body.timeofmagic-bg-hexagon {
   background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNDQwIDU2MCI+CiAgICA8ZyBmaWxsPSJub25lIj4KICAgICAgICA8cGF0aCBkPSJNMjEwLjg0IDY3LjI5TDI3NS44IDEwNC43OUwyNzUuOCAxNzkuNzlMMjEwLjg0IDIxNy4yOUwxNDUuODkgMTc5Ljc5TDE0NS44OSAxMDQuNzl6TTExODUuMTUgLTQ1LjIxTDEyNTAuMSAtNy43MUwxMjUwLjEgNjcuMjlMMTE4NS4xNSAxMDQuNzlMMTEyMC4xOSA2Ny4yOUwxMTIwLjE5IC03LjcxeiIgc3Ryb2tlPSIjODA4MDgwIiBzdHJva2Utd2lkdGg9IjIiIG9wYWNpdHk9IjAuMTUiPjwvcGF0aD4KICAgICAgICA8cGF0aCBkPSJNMjAzLjM0IDY3LjI5IGE3LjUgNy41IDAgMSAwIDE1IDAgYTcuNSA3LjUgMCAxIDAgLTE1IDB6TTI2OC4zIDEwNC43OSBhNy41IDcuNSAwIDEgMCAxNSAwIGE3LjUgNy41IDAgMSAwIC0xNSAwek0yNjguMyAxNzkuNzkgYTcuNSA3LjUgMCAxIDAgMTUgMCBhNy41IDcuNSAwIDEgMCAtMTUgMHpNMjAzLjM0IDIxNy4yOSBhNy41IDcuNSAwIDEgMCAxNSAwIGE3LjUgNy41IDAgMSAwIC0xNSAwek0xMzguMzkgMTc5Ljc5IGE3LjUgNy41IDAgMSAwIDE1IDAgYTcuNSA3LjUgMCAxIDAgLTE1IDB6TTEzOC4zOSAxMDQuNzkgYTcuNSA3LjUgMCAxIDAgMTUgMCBhNy41IDcuNSAwIDEgMCAtMTUgMHpNMTE3Ny42NSAtNDUuMjEgYTcuNSA3LjUgMCAxIDAgMTUgMCBhNy41IDcuNSAwIDEgMCAtMTUgMHpNMTI0Mi42IC03LjcxIGE3LjUgNy41IDAgMSAwIDE1IDAgYTcuNSA3LjUgMCAxIDAgLTE1IDB6TTEyNDIuNiA2Ny4yOSBhNy41IDcuNSAwIDEgMCAxNSAwIGE3LjUgNy41IDAgMSAwIC0xNSAwek0xMTc3LjY1IDEwNC43OSBhNy41IDcuNSAwIDEgMCAxNSAwIGE3LjUgNy41IDAgMSAwIC0xNSAwek0xMTEyLjY5IDY3LjI5IGE3LjUgNy41IDAgMSAwIDE1IDAgYTcuNSA3LjUgMCAxIDAgLTE1IDB6TTExMTIuNjkgLTcuNzEgYTcuNSA3LjUgMCAxIDAgMTUgMCBhNy41IDcuNSAwIDEgMCAtMTUgMHoiIGZpbGw9IiM4MDgwODAiIG9wYWNpdHk9IjAuMTIiPjwvcGF0aD4KICAgICAgICA8cGF0aCBkPSJNMTQyLjU5IDM1OS4xMUwxODUuODkgMzg0LjExTDE4NS44OSA0MzQuMTFMMTQyLjU5IDQ1OS4xMUw5OS4yOCA0MzQuMTFMOTkuMjggMzg0LjExek0yMjkuMTkgNTkuMTFMMjcyLjUgODQuMTFMMjcyLjUgMTM0LjExTDIyOS4xOSAxNTkuMTFMMTg1Ljg5IDEzNC4xMUwxODUuODkgODQuMTF6TTIyOS4xOSAyMDkuMTFMMjcyLjUgMjM0LjExTDI3Mi41IDI4NC4xMUwyMjkuMTkgMzA5LjExTDE4NS44OSAyODQuMTFMMTg1Ljg5IDIzNC4xMXpNMjI5LjE5IDM1OS4xMUwyNzIuNSAzODQuMTFMMjcyLjUgNDM0LjExTDIyOS4xOSA0NTkuMTFMMTg1Ljg5IDQzNC4xMUwxODUuODkgMzg0LjExek0zMTUuOCAyMDkuMTFMMzU5LjEgMjM0LjExTDM1OS4xIDI4NC4xMUwzMTUuOCAzMDkuMTFMMjcyLjUgMjg0LjExTDI3Mi41IDIzNC4xMXpNMjcyLjUgMjg0LjExTDMxNS44IDMwOS4xMUwzMTUuOCAzNTkuMTFMMjcyLjUgMzg0LjExTDIyOS4xOSAzNTkuMTFMMjI5LjE5IDMwOS4xMXpNMzE1LjggMzU5LjExTDM1OS4xIDM4NC4xMUwzNTkuMSA0MzQuMTFMMzE1LjggNDU5LjExTDI3Mi41IDQzNC4xMUwyNzIuNSAzODQuMTF6TTI3Mi41IDQzNC4xMUwzMTUuOCA0NTkuMTFMMzE1LjggNTA5LjExTDI3Mi41IDUzNC4xMUwyMjkuMTkgNTA5LjExTDIyOS4xOSA0NTkuMTF6TTM1OS4xIDI4NC4xMUw0MDIuNCAzMDkuMTFMNDAyLjQgMzU5LjExTDM1OS4xIDM4NC4xMUwzMTUuOCAzNTkuMTFMMzE1LjggMzA5LjExek00NDUuNzEgLTE1Ljg5TDQ4OS4wMSA5LjExTDQ4OS4wMSA1OS4xMUw0NDUuNzEgODQuMTFMNDAyLjQgNTkuMTFMNDAyLjQgOS4xMXpNNDg5LjAxIDM1OS4xMUw1MzIuMzEgMzg0LjExTDUzMi4zMSA0MzQuMTFMNDg5LjAxIDQ1OS4xMUw0NDUuNzEgNDM0LjExTDQ0NS43MSAzODQuMTF6TTU3NS42MSA1OS4xMUw2MTguOTEgODQuMTFMNjE4LjkxIDEzNC4xMUw1NzUuNjEgMTU5LjExTDUzMi4zMSAxMzQuMTFMNTMyLjMxIDg0LjExek01MzIuMzEgMjg0LjExTDU3NS42MSAzMDkuMTFMNTc1LjYxIDM1OS4xMUw1MzIuMzEgMzg0LjExTDQ4OS4wMSAzNTkuMTFMNDg5LjAxIDMwOS4xMXpNNTc1LjYxIDM1OS4xMUw2MTguOTEgMzg0LjExTDYxOC45MSA0MzQuMTFMNTc1LjYxIDQ1OS4xMUw1MzIuMzEgNDM0LjExTDUzMi4zMSAzODQuMTF6TTYxOC45MSAtMTUuODlMNjYyLjIyIDkuMTFMNjYyLjIyIDU5LjExTDYxOC45MSA4NC4xMUw1NzUuNjEgNTkuMTFMNTc1LjYxIDkuMTF6TTY2Mi4yMiAzNTkuMTFMNzA1LjUyIDM4NC4xMUw3MDUuNTIgNDM0LjExTDY2Mi4yMiA0NTkuMTFMNjE4LjkxIDQzNC4xMUw2MTguOTEgMzg0LjExek02NjIuMjIgNTA5LjExTDcwNS41MiA1MzQuMTFMNzA1LjUyIDU4NC4xMUw2NjIuMjIgNjA5LjExTDYxOC45MSA1ODQuMTFMNjE4LjkxIDUzNC4xMXpNNzQ4LjgyIDM1OS4xMUw3OTIuMTMgMzg0LjExTDc5Mi4xMyA0MzQuMTFMNzQ4LjgyIDQ1OS4xMUw3MDUuNTIgNDM0LjExTDcwNS41MiAzODQuMTF6TTcwNS41MiA0MzQuMTFMNzQ4LjgyIDQ1OS4xMUw3NDguODIgNTA5LjExTDcwNS41MiA1MzQuMTFMNjYyLjIyIDUwOS4xMUw2NjIuMjIgNDU5LjExek04NzguNzMgLTE1Ljg5TDkyMi4wMyA5LjExTDkyMi4wMyA1OS4xMUw4NzguNzMgODQuMTFMODM1LjQzIDU5LjExTDgzNS40MyA5LjExek05NjUuMzQgLTE1Ljg5TDEwMDguNjQgOS4xMUwxMDA4LjY0IDU5LjExTDk2NS4zNCA4NC4xMUw5MjIuMDMgNTkuMTFMOTIyLjAzIDkuMTF6TTEwOTUuMjQgNTkuMTFMMTEzOC41NSA4NC4xMUwxMTM4LjU1IDEzNC4xMUwxMDk1LjI0IDE1OS4xMUwxMDUxLjk0IDEzNC4xMUwxMDUxLjk0IDg0LjExek0xMDUxLjk0IDEzNC4xMUwxMDk1LjI0IDE1OS4xMUwxMDk1LjI0IDIwOS4xMUwxMDUxLjk0IDIzNC4xMUwxMDA4LjY0IDIwOS4xMUwxMDA4LjY0IDE1OS4xMXpNMTA1MS45NCAyODQuMTFMMTA5NS4yNCAzMDkuMTFMMTA5NS4yNCAzNTkuMTFMMTA1MS45NCAzODQuMTFMMTAwOC42NCAzNTkuMTFMMTAwOC42NCAzMDkuMTF6TTEwOTUuMjQgMzU5LjExTDExMzguNTUgMzg0LjExTDExMzguNTUgNDM0LjExTDEwOTUuMjQgNDU5LjExTDEwNTEuOTQgNDM0LjExTDEwNTEuOTQgMzg0LjExek0xMTM4LjU1IC0xNS44OUwxMTgxLjg1IDkuMTFMMTE4MS44NSA1OS4xMUwxMTM4LjU1IDg0LjExTDEwOTUuMjQgNTkuMTFMMTA5NS4yNCA5LjExek0xMTM4LjU1IDQzNC4xMUwxMTgxLjg1IDQ1OS4xMUwxMTgxLjg1IDUwOS4xMUwxMTM4LjU1IDUzNC4xMUwxMDk1LjI0IDUwOS4xMUwxMDk1LjI0IDQ1OS4xMXpNMTE4MS44NSA1MDkuMTFMMTIyNS4xNSA1MzQuMTFMMTIyNS4xNSA1ODQuMTFMMTE4MS44NSA2MDkuMTFMMTEzOC41NSA1ODQuMTFMMTEzOC41NSA1MzQuMTF6TTEyNjguNDUgNTkuMTFMMTMxMS43NiA4NC4xMUwxMzExLjc2IDEzNC4xMUwxMjY4LjQ1IDE1OS4xMUwxMjI1LjE1IDEzNC4xMUwxMjI1LjE1IDg0LjExek0xMzExLjc2IC0xNS44OUwxMzU1LjA2IDkuMTFMMTM1NS4wNiA1OS4xMUwxMzExLjc2IDg0LjExTDEyNjguNDUgNTkuMTFMMTI2OC40NSA5LjExek0xMzExLjc2IDEzNC4xMUwxMzU1LjA2IDE1OS4xMUwxMzU1LjA2IDIwOS4xMUwxMzExLjc2IDIzNC4xMUwxMjY4LjQ1IDIwOS4xMUwxMjY4LjQ1IDE1OS4xMXpNMTMxMS43NiAyODQuMTFMMTM1NS4wNiAzMDkuMTFMMTM1NS4wNiAzNTkuMTFMMTMxMS43NiAzODQuMTFMMTI2OC40NSAzNTkuMTFMMTI2OC40NSAzMDkuMTF6TTEzNTUuMDYgNTA5LjExTDEzOTguMzYgNTM0LjExTDEzOTguMzYgNTg0LjExTDEzNTUuMDYgNjA5LjExTDEzMTEuNzYgNTg0LjExTDEzMTEuNzYgNTM0LjExek0xNDQxLjY2IDU5LjExTDE0ODQuOTcgODQuMTFMMTQ4NC45NyAxMzQuMTFMMTQ0MS42NiAxNTkuMTFMMTM5OC4zNiAxMzQuMTFMMTM5OC4zNiA4NC4xMXpNMTQ0MS42NiAyMDkuMTFMMTQ4NC45NyAyMzQuMTFMMTQ4NC45NyAyODQuMTFMMTQ0MS42NiAzMDkuMTFMMTM5OC4zNiAyODQuMTFMMTM5OC4zNiAyMzQuMTF6IiBzdHJva2U9IiM4MDgwODAiIHN0cm9rZS13aWR0aD0iMiIgb3BhY2l0eT0iMC4xNSI+PC9wYXRoPgogICAgPC9nPgo8L3N2Zz4=") !important;
   background-size: cover !important;
   background-position: center !important;
   background-attachment: fixed !important;
 }
 
-html.stezkoy-custom-scrollbar {
+html.timeofmagic-custom-scrollbar {
   scrollbar-width: thin;
-  scrollbar-color: var(--button-primary-bg) transparent;
+  scrollbar-color: var(--timeofmagic-accent-scrollbar) transparent;
 }
 
-html.stezkoy-custom-scrollbar::-webkit-scrollbar {
+html.timeofmagic-custom-scrollbar::-webkit-scrollbar {
   width: 8px;
 }
 
-html.stezkoy-custom-scrollbar::-webkit-scrollbar-track {
+html.timeofmagic-custom-scrollbar::-webkit-scrollbar-track {
   background: transparent;
 }
 
-html.stezkoy-custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: var(--button-primary-bg);
+html.timeofmagic-custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: var(--timeofmagic-accent-scrollbar);
   border-radius: 4px;
 }
 
-html.stezkoy-custom-scrollbar::-webkit-scrollbar-thumb:hover {
+html.timeofmagic-custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background-color: var(--primary-color);
 }
 
-html.stezkoy-swap-layout .Page-container {
+html.timeofmagic-swap-layout .Page-container {
   flex-direction: row-reverse;
 }
 
 @media (min-width: 992px) {
-  html.stezkoy-swap-layout .Composer:not(.fullScreen) {
+  html.timeofmagic-swap-layout .Composer:not(.fullScreen) {
     margin-left: 35px;
     margin-right: 35px;
+  }
+}
+
+.timeofmagic-spark {
+  position: fixed;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  animation: timeofmagic-spark-burst 0.7s ease-out forwards;
+}
+
+.timeofmagic-spark::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: block;
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  border-radius: 50%;
+  background: var(--timeofmagic-accent-spark);
+  box-shadow:
+    0 0 8px var(--timeofmagic-accent-spark),
+    0 0 16px var(--timeofmagic-accent-spark);
+}
+
+@keyframes timeofmagic-spark-burst {
+  0% {
+    transform: scale(0.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(3.5);
+    opacity: 0;
   }
 }

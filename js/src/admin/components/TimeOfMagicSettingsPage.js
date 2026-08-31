@@ -10,7 +10,11 @@ export default class TimeOfMagicSettingsPage extends ExtensionPage {
       m('.container', [
         m('.TimeOfMagicSettings', [
           this._toggle(PREFIX + '.progress_bar', 'admin.progress_bar_label', 'admin.progress_bar_description'),
+          this.setting(PREFIX + '.progress_bar', '')() === '1'
+            ? this._colorField(PREFIX + '.progress_bar_color', 'admin.progress_bar_color_label')
+            : null,
 
+          m('.TimeOfMagicSettings-divider'),
           this._toggle(PREFIX + '.back_to_top', 'admin.back_to_top_label', 'admin.back_to_top_description'),
           this.setting(PREFIX + '.back_to_top', '')() === '1'
             ? m('.TimeOfMagicSettings-indent', [
@@ -24,9 +28,11 @@ export default class TimeOfMagicSettingsPage extends ExtensionPage {
                     placeholder: 'fa-solid fa-arrow-up',
                   }),
                 ]),
+                this._colorField(PREFIX + '.back_to_top_color', 'admin.back_to_top_color_label'),
               ])
             : null,
 
+          m('.TimeOfMagicSettings-divider'),
           this._toggle(PREFIX + '.snow', 'admin.snow_label', 'admin.snow_description'),
           this.setting(PREFIX + '.snow', '')() === '1'
             ? m('.TimeOfMagicSettings-indent', [
@@ -45,8 +51,22 @@ export default class TimeOfMagicSettingsPage extends ExtensionPage {
               ])
             : null,
 
+          m('.TimeOfMagicSettings-divider'),
           this._toggle(PREFIX + '.scrollbar', 'admin.scrollbar_label', 'admin.scrollbar_description'),
+          this.setting(PREFIX + '.scrollbar', '')() === '1'
+            ? this._colorField(PREFIX + '.scrollbar_color', 'admin.scrollbar_color_label')
+            : null,
+
+          m('.TimeOfMagicSettings-divider'),
           this._toggle(PREFIX + '.swap_layout', 'admin.swap_layout_label', 'admin.swap_layout_description'),
+
+          m('.TimeOfMagicSettings-divider'),
+          this._toggle(PREFIX + '.click_spark', 'admin.click_spark_label', 'admin.click_spark_description'),
+          this.setting(PREFIX + '.click_spark', '')() === '1'
+            ? this._colorField(PREFIX + '.click_spark_color', 'admin.click_spark_color_label')
+            : null,
+
+          m('.TimeOfMagicSettings-divider'),
           m('.Form-group', [
             m('label', app.translator.trans(PREFIX + '.admin.background_label')),
             m('select.FormControl', {
@@ -84,5 +104,15 @@ export default class TimeOfMagicSettingsPage extends ExtensionPage {
       ),
       m('p.helpText', app.translator.trans(PREFIX + '.' + descKey)),
     ]);
+  }
+
+  _colorField(key, labelKey) {
+    return this.buildSettingComponent({
+      type: 'color-preview',
+      setting: key,
+      label: app.translator.trans(PREFIX + '.' + labelKey),
+      help: app.translator.trans(PREFIX + '.admin.color_description'),
+      placeholder: app.translator.trans(PREFIX + '.admin.color_placeholder'),
+    });
   }
 }

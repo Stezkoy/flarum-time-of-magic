@@ -11,16 +11,47 @@ function forumAttribute(name) {
 
 var snowCounts = { light: 25, medium: 50, heavy: 75 };
 
+function applyMagicColors(colors) {
+  var map = {
+    progressBar: '--timeofmagic-accent-bar',
+    backToTop: '--timeofmagic-accent-top',
+    scrollbar: '--timeofmagic-accent-scrollbar',
+    clickSpark: '--timeofmagic-accent-spark',
+  };
+
+  Object.keys(map).forEach(function (key) {
+    if (colors[key]) {
+      document.documentElement.style.setProperty(map[key], colors[key]);
+    }
+  });
+}
+
+function createClickSpark() {
+  document.addEventListener('click', function (e) {
+    var spark = document.createElement('div');
+    spark.className = 'timeofmagic-spark';
+    spark.style.left = e.clientX + 'px';
+    spark.style.top = e.clientY + 'px';
+    document.body.appendChild(spark);
+
+    setTimeout(function () {
+      if (spark.parentNode) {
+        spark.parentNode.removeChild(spark);
+      }
+    }, 700);
+  });
+}
+
 function createSnowflakes(count) {
   var container = document.createElement('div');
-  container.id = 'stezkoy-snow';
+  container.id = 'timeofmagic-snow';
   container.setAttribute('aria-hidden', 'true');
 
   var flakes = ['❅', '❅', '❆', '❄', '❅', '❆', '❄', '❅', '❆', '❄', '❅', '❆', '❄', '❅', '❆', '❄', '❅', '❆', '❄', '❄'];
 
   for (var i = 0; i < count; i++) {
     var flake = document.createElement('div');
-    flake.className = 'stezkoy-snowflake';
+    flake.className = 'timeofmagic-snowflake';
     flake.textContent = flakes[i % flakes.length];
     flake.style.left = (Math.random() * 100) + '%';
     flake.style.animationDelay = (Math.random() * 8) + 's, ' + (Math.random() * 4) + 's';
@@ -34,23 +65,31 @@ function createSnowflakes(count) {
 }
 
 app.initializers.add('stezkoy-time-of-magic', function () {
-  var progressBarEnabled = !!forumAttribute('stezkoyTimeOfMagicProgressBar');
-  var backToTopEnabled = !!forumAttribute('stezkoyTimeOfMagicBackToTop');
-  var snowEnabled = !!forumAttribute('stezkoyTimeOfMagicSnow');
-  var scrollbarEnabled = !!forumAttribute('stezkoyTimeOfMagicScrollbar');
-  var swapLayoutEnabled = !!forumAttribute('stezkoyTimeOfMagicSwapLayout');
-  var bgPattern = forumAttribute('stezkoyTimeOfMagicBackground') || '';
+  var progressBarEnabled = !!forumAttribute('timeOfMagicProgressBar');
+  var backToTopEnabled = !!forumAttribute('timeOfMagicBackToTop');
+  var snowEnabled = !!forumAttribute('timeOfMagicSnow');
+  var scrollbarEnabled = !!forumAttribute('timeOfMagicScrollbar');
+  var swapLayoutEnabled = !!forumAttribute('timeOfMagicSwapLayout');
+  var bgPattern = forumAttribute('timeOfMagicBackground') || '';
+  var clickSparkEnabled = !!forumAttribute('timeOfMagicClickSpark');
+
+  applyMagicColors({
+    progressBar: forumAttribute('timeOfMagicProgressBarColor'),
+    backToTop: forumAttribute('timeOfMagicBackToTopColor'),
+    scrollbar: forumAttribute('timeOfMagicScrollbarColor'),
+    clickSpark: forumAttribute('timeOfMagicClickSparkColor'),
+  });
 
   if (scrollbarEnabled) {
-    document.documentElement.classList.add('stezkoy-custom-scrollbar');
+    document.documentElement.classList.add('timeofmagic-custom-scrollbar');
   }
 
   if (swapLayoutEnabled) {
-    document.documentElement.classList.add('stezkoy-swap-layout');
+    document.documentElement.classList.add('timeofmagic-swap-layout');
   }
 
   if (bgPattern) {
-    document.body.classList.add('stezkoy-bg-' + bgPattern);
+    document.body.classList.add('timeofmagic-bg-' + bgPattern);
   }
 
   if (progressBarEnabled) {
@@ -73,8 +112,8 @@ app.initializers.add('stezkoy-time-of-magic', function () {
   }
 
   if (backToTopEnabled) {
-    var rounded = !!forumAttribute('stezkoyTimeOfMagicBackToTopRounded');
-    var iconClass = forumAttribute('stezkoyTimeOfMagicBackToTopIcon') || 'fa-solid fa-arrow-up';
+    var rounded = !!forumAttribute('timeOfMagicBackToTopRounded');
+    var iconClass = forumAttribute('timeOfMagicBackToTopIcon') || 'fa-solid fa-arrow-up';
 
     var btn = document.createElement('div');
     btn.id = 'back-to-top';
@@ -103,8 +142,12 @@ app.initializers.add('stezkoy-time-of-magic', function () {
   }
 
   if (snowEnabled) {
-    var density = forumAttribute('stezkoyTimeOfMagicSnowDensity') || 'medium';
+    var density = forumAttribute('timeOfMagicSnowDensity') || 'medium';
     var count = snowCounts[density] || 10;
     createSnowflakes(count);
+  }
+
+  if (clickSparkEnabled) {
+    createClickSpark();
   }
 });

@@ -2,13 +2,17 @@ stezkoy-time-of-magic:
   admin:
     title: Time of Magic
     description: Добавляет немного магии на ваш сайт Flarum.
+    color_placeholder: 'Например: #00a185'
+    color_description: 'Оставьте пустым, чтобы использовать цвет форума. Примеры: #E7672E, #00a185, red, rgb(255,0,0).'
     progress_bar_label: Прогресс-бар
     progress_bar_description: Полоса прогресса под шапкой при прокрутке страницы.
+    progress_bar_color_label: Цвет прогресс-бара
     back_to_top_label: Кнопка «Наверх»
     back_to_top_description: Плавающая кнопка для быстрого возврата наверх.
     back_to_top_shape_label: Квадратная форма
     back_to_top_shape_description: Использовать квадратную форму вместо круга.
     back_to_top_icon_label: Класс иконки FontAwesome
+    back_to_top_color_label: Цвет кнопки «Наверх»
     snow_label: Падающий снег
     snow_description: Добавляет праздничный эффект падающего снега на весь сайт.
     snow_density_label: Плотность снега
@@ -18,8 +22,12 @@ stezkoy-time-of-magic:
     snow_density_description: Количество снежинок на экране.
     scrollbar_label: Стильный скроллбар
     scrollbar_description: Заменяет стандартный скроллбар на тонкий в цветах сайта.
+    scrollbar_color_label: Цвет скроллбара
     swap_layout_label: Поменять местами сайдбар и контент
     swap_layout_description: Перемещает сайдбар вправо, а посты — влево.
+    click_spark_label: Искры при клике
+    click_spark_description: Вспышка магических частиц в месте клика.
+    click_spark_color_label: Цвет искр при клике
     background_label: Фоновый паттерн
     background_none: Нет
     background_dots: Точки
