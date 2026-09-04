@@ -52,21 +52,6 @@ export default class TimeOfMagicSettingsPage extends ExtensionPage {
             : null,
 
           m('.TimeOfMagicSettings-divider'),
-          this._toggle(PREFIX + '.scrollbar', 'admin.scrollbar_label', 'admin.scrollbar_description'),
-          this.setting(PREFIX + '.scrollbar', '')() === '1'
-            ? this._colorField(PREFIX + '.scrollbar_color', 'admin.scrollbar_color_label')
-            : null,
-
-          m('.TimeOfMagicSettings-divider'),
-          this._toggle(PREFIX + '.swap_layout', 'admin.swap_layout_label', 'admin.swap_layout_description'),
-
-          m('.TimeOfMagicSettings-divider'),
-          this._toggle(PREFIX + '.click_spark', 'admin.click_spark_label', 'admin.click_spark_description'),
-          this.setting(PREFIX + '.click_spark', '')() === '1'
-            ? this._colorField(PREFIX + '.click_spark_color', 'admin.click_spark_color_label')
-            : null,
-
-          m('.TimeOfMagicSettings-divider'),
           this._toggle(PREFIX + '.leaves', 'admin.leaves_label', 'admin.leaves_description'),
           this.setting(PREFIX + '.leaves', '')() === '1'
             ? m('.TimeOfMagicSettings-indent', [
@@ -102,6 +87,21 @@ export default class TimeOfMagicSettingsPage extends ExtensionPage {
                   m('p.helpText', app.translator.trans(PREFIX + '.admin.rain_density_description')),
                 ]),
               ])
+            : null,
+
+          m('.TimeOfMagicSettings-divider'),
+          this._toggle(PREFIX + '.scrollbar', 'admin.scrollbar_label', 'admin.scrollbar_description'),
+          this.setting(PREFIX + '.scrollbar', '')() === '1'
+            ? this._colorField(PREFIX + '.scrollbar_color', 'admin.scrollbar_color_label')
+            : null,
+
+          m('.TimeOfMagicSettings-divider'),
+          this._toggle(PREFIX + '.swap_layout', 'admin.swap_layout_label', 'admin.swap_layout_description'),
+
+          m('.TimeOfMagicSettings-divider'),
+          this._toggle(PREFIX + '.click_spark', 'admin.click_spark_label', 'admin.click_spark_description'),
+          this.setting(PREFIX + '.click_spark', '')() === '1'
+            ? this._colorField(PREFIX + '.click_spark_color', 'admin.click_spark_color_label')
             : null,
 
           m('.TimeOfMagicSettings-divider'),
