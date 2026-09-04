@@ -11,6 +11,8 @@ function forumAttribute(name) {
 }
 
 const snowCounts = { light: 25, medium: 50, heavy: 75 };
+const leavesCounts = { light: 15, medium: 30, heavy: 50 };
+const rainCounts = { light: 40, medium: 80, heavy: 140 };
 
 function applyMagicColors(colors) {
   const map = {
@@ -65,6 +67,47 @@ function createSnowflakes(count) {
   document.body.appendChild(container);
 }
 
+function createLeaves(count) {
+  const container = document.createElement('div');
+  container.id = 'timeofmagic-leaves';
+  container.setAttribute('aria-hidden', 'true');
+
+  const leaves = ['🍂', '🍁', '🍃', '🍂', '🍁', '🍃', '🍂', '🍁'];
+
+  for (let i = 0; i < count; i++) {
+    const leaf = document.createElement('div');
+    leaf.className = 'timeofmagic-leaf';
+    leaf.textContent = leaves[i % leaves.length];
+    leaf.style.left = `${Math.random() * 100}%`;
+    leaf.style.animationDelay = `${Math.random() * 10}s`;
+    leaf.style.animationDuration = `${6 + Math.random() * 6}s`;
+    leaf.style.opacity = 0.5 + Math.random() * 0.5;
+    leaf.style.fontSize = `${0.8 + Math.random() * 0.8}em`;
+    container.appendChild(leaf);
+  }
+
+  document.body.appendChild(container);
+}
+
+function createRain(count) {
+  const container = document.createElement('div');
+  container.id = 'timeofmagic-rain';
+  container.setAttribute('aria-hidden', 'true');
+
+  for (let i = 0; i < count; i++) {
+    const drop = document.createElement('div');
+    drop.className = 'timeofmagic-raindrop';
+    drop.style.left = `${Math.random() * 100}%`;
+    drop.style.animationDelay = `${Math.random() * 2}s`;
+    drop.style.animationDuration = `${0.5 + Math.random() * 0.5}s`;
+    drop.style.opacity = 0.2 + Math.random() * 0.4;
+    drop.style.height = `${10 + Math.random() * 20}px`;
+    container.appendChild(drop);
+  }
+
+  document.body.appendChild(container);
+}
+
 app.initializers.add('stezkoy-time-of-magic', () => {
   const progressBarEnabled = !!forumAttribute('timeOfMagicProgressBar');
   const backToTopEnabled = !!forumAttribute('timeOfMagicBackToTop');
@@ -89,7 +132,8 @@ app.initializers.add('stezkoy-time-of-magic', () => {
     document.documentElement.classList.add('timeofmagic-swap-layout');
   }
 
-  if (bgPattern) {
+  const VALID_PATTERNS = ['dots', 'grid', 'diagonal', 'waves', 'hexagon'];
+  if (bgPattern && VALID_PATTERNS.includes(bgPattern)) {
     document.body.classList.add(`timeofmagic-bg-${bgPattern}`);
   }
 
@@ -150,5 +194,19 @@ app.initializers.add('stezkoy-time-of-magic', () => {
 
   if (clickSparkEnabled) {
     createClickSpark();
+  }
+
+  const leavesEnabled = !!forumAttribute('timeOfMagicLeaves');
+  if (leavesEnabled) {
+    const leavesDensity = forumAttribute('timeOfMagicLeavesDensity') || 'medium';
+    const leavesCount = leavesCounts[leavesDensity] || 30;
+    createLeaves(leavesCount);
+  }
+
+  const rainEnabled = !!forumAttribute('timeOfMagicRain');
+  if (rainEnabled) {
+    const rainDensity = forumAttribute('timeOfMagicRainDensity') || 'medium';
+    const rainCount = rainCounts[rainDensity] || 80;
+    createRain(rainCount);
   }
 });

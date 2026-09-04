@@ -40,6 +40,14 @@ return [
             return (bool) $value;
         })
         ->serializeToForum('timeOfMagicClickSparkColor', 'stezkoy-time-of-magic.click_spark_color')
+        ->serializeToForum('timeOfMagicLeaves', 'stezkoy-time-of-magic.leaves', function ($value) {
+            return (bool) $value;
+        })
+        ->serializeToForum('timeOfMagicLeavesDensity', 'stezkoy-time-of-magic.leaves_density')
+        ->serializeToForum('timeOfMagicRain', 'stezkoy-time-of-magic.rain', function ($value) {
+            return (bool) $value;
+        })
+        ->serializeToForum('timeOfMagicRainDensity', 'stezkoy-time-of-magic.rain_density')
         ->default('stezkoy-time-of-magic.progress_bar', false)
         ->default('stezkoy-time-of-magic.progress_bar_color', '')
         ->default('stezkoy-time-of-magic.back_to_top', false)
@@ -53,7 +61,11 @@ return [
         ->default('stezkoy-time-of-magic.swap_layout', false)
         ->default('stezkoy-time-of-magic.background', '')
         ->default('stezkoy-time-of-magic.click_spark', false)
-        ->default('stezkoy-time-of-magic.click_spark_color', ''),
+        ->default('stezkoy-time-of-magic.click_spark_color', '')
+        ->default('stezkoy-time-of-magic.leaves', false)
+        ->default('stezkoy-time-of-magic.leaves_density', 'medium')
+        ->default('stezkoy-time-of-magic.rain', false)
+        ->default('stezkoy-time-of-magic.rain_density', 'medium'),
 
     (new Extend\Locales(__DIR__.'/locale')),
 ];

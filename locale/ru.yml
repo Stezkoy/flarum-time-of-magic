@@ -36,3 +36,17 @@ stezkoy-time-of-magic:
     background_waves: Волны
     background_hexagon: Гексагоны
     background_description: Лёгкий фоновый паттерн, работает на светлых и тёмных темах.
+    leaves_label: Падающие листья
+    leaves_description: Добавляет осенний эффект падающих листьев на весь сайт.
+    leaves_density_label: Плотность листьев
+    leaves_density_light: Лёгкий
+    leaves_density_medium: Средний
+    leaves_density_heavy: Плотный
+    leaves_density_description: Количество листьев на экране.
+    rain_label: Падающий дождь
+    rain_description: Добавляет эффект дождя на весь сайт.
+    rain_density_label: Плотность дождя
+    rain_density_light: Лёгкий
+    rain_density_medium: Средний
+    rain_density_heavy: Плотный
+    rain_density_description: Количество капель на экране.

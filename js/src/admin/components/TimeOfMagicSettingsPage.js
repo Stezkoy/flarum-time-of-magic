@@ -67,6 +67,44 @@ export default class TimeOfMagicSettingsPage extends ExtensionPage {
             : null,
 
           m('.TimeOfMagicSettings-divider'),
+          this._toggle(PREFIX + '.leaves', 'admin.leaves_label', 'admin.leaves_description'),
+          this.setting(PREFIX + '.leaves', '')() === '1'
+            ? m('.TimeOfMagicSettings-indent', [
+                m('.Form-group', [
+                  m('label', app.translator.trans(PREFIX + '.admin.leaves_density_label')),
+                  m('select.FormControl', {
+                    value: this.setting(PREFIX + '.leaves_density', 'medium')(),
+                    onchange: (e) => this.setting(PREFIX + '.leaves_density')(e.target.value),
+                  }, [
+                    m('option', { value: 'light' }, app.translator.trans(PREFIX + '.admin.leaves_density_light')),
+                    m('option', { value: 'medium' }, app.translator.trans(PREFIX + '.admin.leaves_density_medium')),
+                    m('option', { value: 'heavy' }, app.translator.trans(PREFIX + '.admin.leaves_density_heavy')),
+                  ]),
+                  m('p.helpText', app.translator.trans(PREFIX + '.admin.leaves_density_description')),
+                ]),
+              ])
+            : null,
+
+          m('.TimeOfMagicSettings-divider'),
+          this._toggle(PREFIX + '.rain', 'admin.rain_label', 'admin.rain_description'),
+          this.setting(PREFIX + '.rain', '')() === '1'
+            ? m('.TimeOfMagicSettings-indent', [
+                m('.Form-group', [
+                  m('label', app.translator.trans(PREFIX + '.admin.rain_density_label')),
+                  m('select.FormControl', {
+                    value: this.setting(PREFIX + '.rain_density', 'medium')(),
+                    onchange: (e) => this.setting(PREFIX + '.rain_density')(e.target.value),
+                  }, [
+                    m('option', { value: 'light' }, app.translator.trans(PREFIX + '.admin.rain_density_light')),
+                    m('option', { value: 'medium' }, app.translator.trans(PREFIX + '.admin.rain_density_medium')),
+                    m('option', { value: 'heavy' }, app.translator.trans(PREFIX + '.admin.rain_density_heavy')),
+                  ]),
+                  m('p.helpText', app.translator.trans(PREFIX + '.admin.rain_density_description')),
+                ]),
+              ])
+            : null,
+
+          m('.TimeOfMagicSettings-divider'),
           m('.Form-group', [
             m('label', app.translator.trans(PREFIX + '.admin.background_label')),
             m('select.FormControl', {
