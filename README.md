@@ -20,6 +20,14 @@ A floating button that appears after scrolling down. Click it to smoothly scroll
 Adds animated falling snowflakes across the entire site. Perfect for the holiday season.
 - **3 density levels:** Light (25 flakes), Medium (50 flakes), Heavy (75 flakes)
 
+### Falling Leaves
+Adds animated autumn leaves drifting across the entire site.
+- **3 density levels:** Light (10 leaves), Medium (25 leaves), Heavy (40 leaves)
+
+### Falling Rain
+Adds a rain effect with falling raindrops across the entire site. Color adapts to the site theme.
+- **3 density levels:** Light (40 drops), Medium (80 drops), Heavy (140 drops)
+
 ### Custom Scrollbar
 Replaces the default browser scrollbar with a thin, themed one that matches your site colors.
 

@@ -11,7 +11,7 @@ function forumAttribute(name) {
 }
 
 const snowCounts = { light: 25, medium: 50, heavy: 75 };
-const leavesCounts = { light: 15, medium: 30, heavy: 50 };
+const leavesCounts = { light: 10, medium: 25, heavy: 40 };
 const rainCounts = { light: 40, medium: 80, heavy: 140 };
 
 function applyMagicColors(colors) {
