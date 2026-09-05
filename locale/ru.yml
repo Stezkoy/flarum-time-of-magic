@@ -4,6 +4,12 @@ stezkoy-time-of-magic:
     description: Добавляет немного магии на ваш сайт Flarum.
     color_placeholder: 'Например: #00a185'
     color_description: 'Оставьте пустым, чтобы использовать цвет форума. Примеры: #E7672E, #00a185, red, rgb(255,0,0).'
+    section_interface: Интерфейс
+    section_effects: Эффекты
+    section_scheduler: Планировщик
+    density_light: Лёгкий
+    density_medium: Средний
+    density_heavy: Плотный
     progress_bar_label: Прогресс-бар
     progress_bar_description: Полоса прогресса под шапкой при прокрутке страницы.
     progress_bar_color_label: Цвет прогресс-бара
@@ -50,3 +56,39 @@ stezkoy-time-of-magic:
     rain_density_medium: Средний
     rain_density_heavy: Плотный
     rain_density_description: Количество капель на экране.
+    petals_label: Цветение сакуры
+    petals_description: Лепестки сакуры, дрейфующие по всему сайту.
+    petals_density_label: Плотность лепестков
+    petals_density_description: Количество лепестков на экране.
+    confetti_label: Конфетти
+    confetti_description: Цветное конфетти для праздников.
+    confetti_density_label: Плотность конфетти
+    confetti_density_description: Количество элементов конфетти на экране.
+    hearts_label: Летящие сердечки
+    hearts_description: Сердечки, взлетающие вверх ко Дню Святого Валентина.
+    hearts_density_label: Плотность сердечек
+    hearts_density_description: Количество сердечек на экране.
+    clovers_label: Четырёхлистные клеверы
+    clovers_description: Крутящиеся четырёхлистные клеверы ко Дню Святого Патрика.
+    clovers_density_label: Плотность клеверов
+    clovers_density_description: Количество клеверов на экране.
+    eggs_label: Пасхальные яйца
+    eggs_description: Прыгающие пасхальные яйца на всём сайте.
+    eggs_density_label: Плотность яиц
+    eggs_density_description: Количество яиц на экране.
+    lanterns_label: Китайский Новый год
+    lanterns_description: Красные фонарики, драконы и символы удачи к Китайскому Новому году.
+    lanterns_density_label: Плотность фонариков
+    lanterns_density_description: Количество фонариков на экране.
+    scheduler_add_button: Добавить запись
+    scheduler_description: Автоматически включает эффекты в указанный период. Эффект отображается, когда активно его расписание, даже если ручной переключатель выключен.
+    scheduler_empty: Записей пока нет. Нажмите «Добавить запись», чтобы создать первую.
+    scheduler_title_placeholder: 'Например: Новый год'
+    scheduler_start_label: Начало
+    scheduler_end_label: Конец
+    scheduler_effects_label: Эффекты
+    scheduler_enabled_label: Активно
+    scheduler_status_active: Активно сейчас
+    scheduler_status_inactive: Неактивно
+    scheduler_delete_button: Удалить запись
+    scheduler_delete_confirm: Удалить это расписание?

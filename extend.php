@@ -48,6 +48,39 @@ return [
             return (bool) $value;
         })
         ->serializeToForum('timeOfMagicRainDensity', 'stezkoy-time-of-magic.rain_density')
+        ->serializeToForum('timeOfMagicPetals', 'stezkoy-time-of-magic.petals', function ($value) {
+            return (bool) $value;
+        })
+        ->serializeToForum('timeOfMagicPetalsDensity', 'stezkoy-time-of-magic.petals_density')
+        ->serializeToForum('timeOfMagicConfetti', 'stezkoy-time-of-magic.confetti', function ($value) {
+            return (bool) $value;
+        })
+        ->serializeToForum('timeOfMagicConfettiDensity', 'stezkoy-time-of-magic.confetti_density')
+        ->serializeToForum('timeOfMagicHearts', 'stezkoy-time-of-magic.hearts', function ($value) {
+            return (bool) $value;
+        })
+        ->serializeToForum('timeOfMagicHeartsDensity', 'stezkoy-time-of-magic.hearts_density')
+        ->serializeToForum('timeOfMagicClovers', 'stezkoy-time-of-magic.clovers', function ($value) {
+            return (bool) $value;
+        })
+        ->serializeToForum('timeOfMagicCloversDensity', 'stezkoy-time-of-magic.clovers_density')
+        ->serializeToForum('timeOfMagicEggs', 'stezkoy-time-of-magic.eggs', function ($value) {
+            return (bool) $value;
+        })
+        ->serializeToForum('timeOfMagicEggsDensity', 'stezkoy-time-of-magic.eggs_density')
+        ->serializeToForum('timeOfMagicLanterns', 'stezkoy-time-of-magic.lanterns', function ($value) {
+            return (bool) $value;
+        })
+        ->serializeToForum('timeOfMagicLanternsDensity', 'stezkoy-time-of-magic.lanterns_density')
+        ->serializeToForum('timeOfMagicSchedules', 'stezkoy-time-of-magic.schedules', function ($value) {
+            if (is_array($value)) {
+                return $value;
+            }
+
+            $decoded = json_decode((string) $value, true);
+
+            return is_array($decoded) ? $decoded : [];
+        })
         ->default('stezkoy-time-of-magic.progress_bar', false)
         ->default('stezkoy-time-of-magic.progress_bar_color', '')
         ->default('stezkoy-time-of-magic.back_to_top', false)
@@ -65,7 +98,20 @@ return [
         ->default('stezkoy-time-of-magic.leaves', false)
         ->default('stezkoy-time-of-magic.leaves_density', 'medium')
         ->default('stezkoy-time-of-magic.rain', false)
-        ->default('stezkoy-time-of-magic.rain_density', 'medium'),
+        ->default('stezkoy-time-of-magic.rain_density', 'medium')
+        ->default('stezkoy-time-of-magic.petals', false)
+        ->default('stezkoy-time-of-magic.petals_density', 'medium')
+        ->default('stezkoy-time-of-magic.confetti', false)
+        ->default('stezkoy-time-of-magic.confetti_density', 'medium')
+        ->default('stezkoy-time-of-magic.hearts', false)
+        ->default('stezkoy-time-of-magic.hearts_density', 'medium')
+        ->default('stezkoy-time-of-magic.clovers', false)
+        ->default('stezkoy-time-of-magic.clovers_density', 'medium')
+        ->default('stezkoy-time-of-magic.eggs', false)
+        ->default('stezkoy-time-of-magic.eggs_density', 'medium')
+        ->default('stezkoy-time-of-magic.lanterns', false)
+        ->default('stezkoy-time-of-magic.lanterns_density', 'medium')
+        ->default('stezkoy-time-of-magic.schedules', '[]'),
 
     (new Extend\Locales(__DIR__.'/locale')),
 ];
