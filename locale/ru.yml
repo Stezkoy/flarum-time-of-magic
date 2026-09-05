@@ -83,12 +83,20 @@ stezkoy-time-of-magic:
     scheduler_add_button: Добавить запись
     scheduler_description: Автоматически включает эффекты в указанный период. Эффект отображается, когда активно его расписание, даже если ручной переключатель выключен.
     scheduler_empty: Записей пока нет. Нажмите «Добавить запись», чтобы создать первую.
+    scheduler_title_label: Название
     scheduler_title_placeholder: 'Например: Новый год'
+    scheduler_untitled: Без названия
     scheduler_start_label: Начало
     scheduler_end_label: Конец
     scheduler_effects_label: Эффекты
     scheduler_enabled_label: Активно
     scheduler_status_active: Активно сейчас
     scheduler_status_inactive: Неактивно
+    scheduler_edit_button: Редактировать запись
     scheduler_delete_button: Удалить запись
     scheduler_delete_confirm: Удалить это расписание?
+    scheduler_modal_add_title: Добавить расписание
+    scheduler_modal_edit_title: Редактировать расписание
+    scheduler_modal_save: Сохранить
+    scheduler_cancel_button: Отмена
+    scheduler_no_effects: Эффекты не выбраны

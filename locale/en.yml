@@ -83,12 +83,20 @@ stezkoy-time-of-magic:
     scheduler_add_button: Add schedule
     scheduler_description: Automatically enable falling effects during a certain period. An effect shows when its schedule is active, even if the manual toggle is off.
     scheduler_empty: No schedules yet. Click "Add schedule" to create one.
+    scheduler_title_label: Title
     scheduler_title_placeholder: 'E.g. New Year'
+    scheduler_untitled: Untitled schedule
     scheduler_start_label: Start
     scheduler_end_label: End
     scheduler_effects_label: Effects
     scheduler_enabled_label: Enabled
     scheduler_status_active: Active now
     scheduler_status_inactive: Inactive
+    scheduler_edit_button: Edit schedule
     scheduler_delete_button: Delete schedule
     scheduler_delete_confirm: Delete this schedule?
+    scheduler_modal_add_title: Add schedule
+    scheduler_modal_edit_title: Edit schedule
+    scheduler_modal_save: Save
+    scheduler_cancel_button: Cancel
+    scheduler_no_effects: No effects selected

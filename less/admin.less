@@ -1,46 +1,93 @@
 .TimeOfMagicSettings {
-  max-width: 700px;
+  max-width: 920px;
 }
 
 .TimeOfMagicSettings-section + .TimeOfMagicSettings-section {
-  margin-top: 32px;
+  margin-top: 40px;
 }
 
 .TimeOfMagicSettings-sectionHeader h3 {
-  margin: 0;
-  font-size: 16px;
+  margin: 0 0 6px;
+  font-size: 15px;
   text-transform: uppercase;
   letter-spacing: 0.04em;
   color: var(--muted-color);
 }
 
-.TimeOfMagicSettings-card {
-  margin-top: 10px;
-  padding: 8px 16px 16px;
-  background: var(--control-bg);
-  border-radius: var(--border-radius);
+.TimeOfMagicSettings-sectionBody {
+  margin-top: 4px;
 }
 
-.TimeOfMagicSettings-card .Form-group + .Form-group {
-  margin-top: 20px;
+.TimeOfMagicSettings-interfaceRow {
+  display: flex;
+  flex-direction: column;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--control-bg);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  .Form-group {
+    margin: 0;
+  }
+
+  .helpText {
+    margin-top: 5px;
+    color: var(--muted-color);
+    font-size: 12px;
+  }
 }
 
 .TimeOfMagicSettings-indent {
-  padding-left: 24px;
-  border-left: 2px solid var(--body-bg);
-  margin: 8px 0 16px;
+  padding-left: 16px;
+  border-left: 2px solid var(--control-bg);
+  margin: 12px 0 0;
 }
 
-.TimeOfMagicSettings .helpText {
-  margin-top: 5px;
-  margin-bottom: 20px;
-  color: var(--muted-color);
-  font-size: 12px;
+.TimeOfMagicSettings-indent .Form-group + .Form-group {
+  margin-top: 12px;
 }
 
 .TimeOfMagicSettings .FormControl {
   max-width: 400px;
-  font-family: monospace;
+}
+
+.TimeOfMagicSettings-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 768px) {
+  .TimeOfMagicSettings-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 40px;
+  }
+}
+
+.TimeOfMagicSettings-effectRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--control-bg);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .TimeOfMagicSettings-effectRow:nth-last-child(-n + 2) {
+    border-bottom: none;
+  }
+}
+
+.TimeOfMagicSettings-densitySelect {
+  width: auto;
+  min-width: 130px;
+  margin: 0;
 }
 
 .TimeOfMagicSettings-schedulerHeader {
@@ -48,16 +95,19 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+  margin-top: 8px;
 }
 
 .TimeOfMagicSettings-schedulerHeader .helpText {
   margin: 0;
 }
 
-.TimeOfMagicSettings-schedulerList {
+.TimeOfMagicSettings-CardList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   margin-top: 16px;
-  display: grid;
-  gap: 12px;
+  margin-bottom: 16px;
 }
 
 .TimeOfMagicSettings-schedulerEmpty {
@@ -70,93 +120,97 @@
 }
 
 .TimeOfMagicSettings-scheduleCard {
-  padding: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  padding: 12px 16px;
   background: var(--body-bg);
   border: 1px solid var(--control-bg);
-  border-radius: var(--border-radius);
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: all 180ms;
+
+  &:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+    border-color: var(--primary-color);
+  }
+
+  &.is-inactive {
+    opacity: 0.65;
+  }
+}
+
+.TimeOfMagicSettings-scheduleInfo {
+  flex: 0 1 0;
+  min-width: 180px;
 }
 
 .TimeOfMagicSettings-scheduleHeader {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 12px;
+  flex-wrap: wrap;
 }
 
-.TimeOfMagicSettings-scheduleTitle.FormControl {
-  max-width: none;
-  flex: 1;
-  font-family: inherit;
+.TimeOfMagicSettings-scheduleTitle {
+  font-weight: 600;
+  color: var(--heading-color);
 }
 
-.TimeOfMagicSettings-scheduleRow {
+.TimeOfMagicSettings-scheduleDates {
+  margin-top: 4px;
   display: flex;
-  align-items: flex-end;
-  gap: 8px;
-  margin-bottom: 12px;
+  flex-direction: column;
+  gap: 2px;
 }
 
-.TimeOfMagicSettings-scheduleField {
-  flex: 1;
-  min-width: 0;
-}
-
-.TimeOfMagicSettings-scheduleField label {
-  display: block;
-  margin-bottom: 4px;
-  font-weight: bold;
-}
-
-.TimeOfMagicSettings-scheduleField .FormControl {
-  max-width: none;
-  width: 100%;
-}
-
-.TimeOfMagicSettings-scheduleArrow {
-  padding-bottom: 8px;
+.TimeOfMagicSettings-scheduleDate {
   color: var(--muted-color);
-}
-
-.TimeOfMagicSettings-scheduleEffects > label {
-  display: block;
-  margin-bottom: 6px;
-  font-weight: bold;
+  font-size: 12px;
 }
 
 .TimeOfMagicSettings-schedulePills {
+  flex: 1 1 0;
+  min-width: 0;
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
 }
 
 .TimeOfMagicSettings-schedulePill {
-  border: 1px solid var(--control-bg);
-  background: var(--body-bg);
-  color: var(--muted-color);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--control-bg);
+  color: var(--text-color);
   border-radius: 999px;
   padding: 3px 10px;
   font-size: 12px;
-  cursor: pointer;
-  transition:
-    background-color 0.2s,
-    color 0.2s,
-    border-color 0.2s;
+}
 
-  &.active {
-    background: var(--primary-color);
-    border-color: var(--primary-color);
-    color: #fff;
+.TimeOfMagicSettings-schedulePill-density {
+  color: var(--muted-color);
+  font-size: 11px;
+
+  &::before {
+    content: '·';
+    margin-right: 6px;
   }
 }
 
-.TimeOfMagicSettings-scheduleFooter {
+.TimeOfMagicSettings-schedulePill--none {
+  color: var(--muted-color);
+  font-style: italic;
+}
+
+.TimeOfMagicSettings-scheduleActions {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-top: 12px;
-  padding-top: 12px;
-  border-top: 1px solid var(--control-bg);
+  gap: 10px;
+  flex-shrink: 0;
 }
 
 .TimeOfMagicSettings-scheduleStatus {
@@ -165,15 +219,77 @@
   text-transform: uppercase;
   letter-spacing: 0.04em;
   padding: 3px 10px;
-  border-radius: 999px;
+  border-radius: 4px;
 
   &.active {
-    background: rgba(46, 204, 113, 0.15);
-    color: #2ecc71;
+    background: rgba(39, 174, 96, 0.15);
+    color: #27ae60;
   }
 
   &.inactive {
-    background: var(--control-bg);
+    background: rgba(0, 0, 0, 0.05);
     color: var(--muted-color);
   }
+}
+
+.TimeOfMagicModal {
+  .Modal-content {
+    max-width: 800px;
+  }
+}
+
+.TimeOfMagicModal-row {
+  display: grid;
+  gap: 0 16px;
+}
+
+@media (min-width: 768px) {
+  .TimeOfMagicModal-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.TimeOfMagicModal-effects {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+  margin-top: 4px;
+}
+
+@media (min-width: 768px) {
+  .TimeOfMagicModal-effects {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.TimeOfMagicModal-effect {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 10px;
+  border: 1px solid var(--control-bg);
+  border-radius: 6px;
+
+  .Checkbox {
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+  }
+}
+
+.TimeOfMagicModal-density {
+  width: auto;
+  min-width: 120px;
+  margin: 0;
+
+  &.is-disabled {
+    opacity: 0.4;
+  }
+}
+
+.TimeOfMagicModal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
 }

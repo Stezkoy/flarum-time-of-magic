@@ -167,18 +167,48 @@ function getSchedules() {
   return [];
 }
 
+function normalizeEffects(schedule) {
+  return (schedule.effects || []).map((effect) =>
+    typeof effect === 'string' ? { name: effect, density: null } : effect
+  );
+}
+
 function isScheduled(kind) {
   const now = Date.now();
 
   return getSchedules().some((s) => {
     if (!s || !s.enabled) return false;
-    if (!Array.isArray(s.effects) || !s.effects.includes(kind)) return false;
+    if (!normalizeEffects(s).some((e) => e.name === kind)) return false;
 
     const start = new Date(s.start).getTime();
     const end = new Date(s.end).getTime();
 
     return !Number.isNaN(start) && !Number.isNaN(end) && now >= start && now <= end;
   });
+}
+
+function scheduledDensity(kind) {
+  const now = Date.now();
+  let density = null;
+
+  getSchedules().some((s) => {
+    if (!s || !s.enabled) return false;
+
+    const effect = normalizeEffects(s).find((e) => e.name === kind && e.density);
+    if (!effect) return false;
+
+    const start = new Date(s.start).getTime();
+    const end = new Date(s.end).getTime();
+
+    if (!Number.isNaN(start) && !Number.isNaN(end) && now >= start && now <= end) {
+      density = effect.density;
+      return true;
+    }
+
+    return false;
+  });
+
+  return density;
 }
 
 function isEffectActive(kind) {
@@ -315,7 +345,7 @@ function initClickSpark() {
 }
 
 function initFallingEffect(kind) {
-  const density = forumAttribute('timeOfMagic' + capitalize(kind) + 'Density') || 'medium';
+  const density = scheduledDensity(kind) || forumAttribute('timeOfMagic' + capitalize(kind) + 'Density') || 'medium';
   const counts = FALLING_EFFECTS[kind].counts;
   createFallingEffect(kind, counts[density] || counts.medium);
 }
