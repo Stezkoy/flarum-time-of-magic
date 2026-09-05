@@ -16,17 +16,51 @@ A floating button that appears after scrolling down. Click it to smoothly scroll
 - Choose between **circle** or **rounded square** shape
 - Use any **FontAwesome icon** (e.g. `fa-solid fa-chevron-up`, `fa-solid fa-angle-double-up`)
 
-### Falling Snow
-Adds animated falling snowflakes across the entire site. Perfect for the holiday season.
-- **3 density levels:** Light (25 flakes), Medium (50 flakes), Heavy (75 flakes)
+### Falling effects
+Every falling effect has **3 density levels** — Light, Medium and Heavy.
 
-### Falling Leaves
-Adds animated autumn leaves drifting across the entire site.
-- **3 density levels:** Light (10 leaves), Medium (25 leaves), Heavy (40 leaves)
+#### Falling Snow
+Animated falling snowflakes across the entire site. Perfect for the holiday season.
+- **Density:** Light (25 flakes), Medium (50 flakes), Heavy (75 flakes)
 
-### Falling Rain
-Adds a rain effect with falling raindrops across the entire site. Color adapts to the site theme.
-- **3 density levels:** Light (40 drops), Medium (80 drops), Heavy (140 drops)
+#### Falling Leaves
+Animated autumn leaves drifting across the entire site.
+- **Density:** Light (10 leaves), Medium (25 leaves), Heavy (40 leaves)
+
+#### Falling Rain
+A rain effect with falling raindrops across the entire site. Color adapts to the site theme.
+- **Density:** Light (40 drops), Medium (80 drops), Heavy (140 drops)
+
+#### Cherry Blossom Petals
+Spring cherry blossom petals drifting across the entire site.
+- **Density:** Light (12 petals), Medium (24 petals), Heavy (40 petals)
+
+#### Confetti
+Colorful confetti falling for celebrations and parties.
+- **Density:** Light (20 pieces), Medium (40 pieces), Heavy (60 pieces)
+
+#### Floating Hearts
+Hearts floating up for Valentine's Day.
+- **Density:** Light (10 hearts), Medium (20 hearts), Heavy (35 hearts)
+
+#### Four-Leaf Clovers
+Spinning four-leaf clovers for St. Patrick's Day.
+- **Density:** Light (12 clovers), Medium (25 clovers), Heavy (40 clovers)
+
+#### Easter Eggs
+Bouncing Easter eggs across the site for Easter.
+- **Density:** Light (8 eggs), Medium (15 eggs), Heavy (25 eggs)
+
+#### Chinese New Year
+Red lanterns, dragons and lucky charms for Chinese New Year.
+- **Density:** Light (10 lanterns), Medium (20 lanterns), Heavy (35 lanterns)
+
+#### Fireflies
+Glowing fireflies rising through a summer night.
+- **Density:** Light (12 fireflies), Medium (25 fireflies), Heavy (40 fireflies)
+
+### Scheduler
+Automatically enable effects during a specific period of time. Create a schedule with a title, start and end date, pick the effects (each with its own density) and enable it — the effects will show whenever the schedule is active, even if the manual toggle is off.
 
 ### Custom Scrollbar
 Replaces the default browser scrollbar with a thin, themed one that matches your site colors.

@@ -198,7 +198,7 @@
   font-size: 11px;
 
   &::before {
-    content: '·';
+    content: "·";
     margin-right: 6px;
   }
 }
@@ -224,6 +224,9 @@
     &:hover {
       transform: none;
     }
+  }
+  .TimeOfMagicSettings-schedulerHeader {
+    flex-wrap: wrap;
   }
 
   .TimeOfMagicSettings-scheduleInfo {
@@ -274,12 +277,6 @@
   gap: 0 16px;
 }
 
-@media (min-width: 768px) {
-  .TimeOfMagicModal-row {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
 .TimeOfMagicModal-effects {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -288,6 +285,10 @@
 }
 
 @media (min-width: 768px) {
+  .TimeOfMagicModal-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
   .TimeOfMagicModal-effects {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
