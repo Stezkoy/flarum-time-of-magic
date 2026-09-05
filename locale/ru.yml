@@ -80,6 +80,10 @@ stezkoy-time-of-magic:
     lanterns_description: Красные фонарики, драконы и символы удачи к Китайскому Новому году.
     lanterns_density_label: Плотность фонариков
     lanterns_density_description: Количество фонариков на экране.
+    fireflies_label: Светлячки
+    fireflies_description: Светящиеся светлячки, поднимающиеся вверх летней ночью.
+    fireflies_density_label: Плотность светлячков
+    fireflies_density_description: Количество светлячков на экране.
     scheduler_add_button: Добавить запись
     scheduler_description: Автоматически включает эффекты в указанный период. Эффект отображается, когда активно его расписание, даже если ручной переключатель выключен.
     scheduler_empty: Записей пока нет. Нажмите «Добавить запись», чтобы создать первую.

@@ -265,6 +265,33 @@ html {
   animation-iteration-count: infinite, infinite;
 }
 
+@keyframes timeofmagic-firefly-rise {
+  0% { top: 110%; }
+  100% { top: -10%; }
+}
+
+@keyframes timeofmagic-firefly-drift {
+  0% { transform: translateX(0) scale(1); }
+  25% { transform: translateX(35px) scale(1.2); }
+  50% { transform: translateX(-25px) scale(0.9); }
+  75% { transform: translateX(30px) scale(1.1); }
+  100% { transform: translateX(0) scale(1); }
+}
+
+.timeofmagic-firefly {
+  top: 110%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ffec8a;
+  box-shadow:
+    0 0 6px 2px rgba(255, 236, 138, 0.8),
+    0 0 18px 6px rgba(255, 224, 90, 0.35);
+  animation-name: timeofmagic-firefly-rise, timeofmagic-firefly-drift;
+  animation-timing-function: linear, ease-in-out;
+  animation-iteration-count: infinite, infinite;
+}
+
 body.timeofmagic-bg-dots {
   background-image: radial-gradient(circle, rgba(128, 128, 128, 0.12) 1px, transparent 1px) !important;
   background-size: 20px 20px !important;

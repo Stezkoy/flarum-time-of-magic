@@ -14,6 +14,7 @@ const EFFECT_OPTIONS = [
   { value: 'clovers', label: 'clovers_label' },
   { value: 'eggs', label: 'eggs_label' },
   { value: 'lanterns', label: 'lanterns_label' },
+  { value: 'fireflies', label: 'fireflies_label' },
 ];
 
 const DENSITY_LABEL_MAP = {

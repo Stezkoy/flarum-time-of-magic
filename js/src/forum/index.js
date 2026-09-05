@@ -134,6 +134,18 @@ const FALLING_EFFECTS = {
     fontScale: [0.9, 1.7],
     dualAnimation: true,
   },
+  fireflies: {
+    containerId: 'timeofmagic-fireflies',
+    className: 'timeofmagic-firefly',
+    counts: { light: 12, medium: 25, heavy: 40 },
+    fallDelay: [0, 14],
+    fallDuration: [10, 18],
+    swayDelay: [0, 6],
+    swayDuration: [3, 7],
+    opacity: [0.6, 1],
+    direction: 'up',
+    dualAnimation: true,
+  },
 };
 
 function applyMagicColors(colors) {
@@ -386,6 +398,10 @@ function initLanterns() {
   initFallingEffect('lanterns');
 }
 
+function initFireflies() {
+  initFallingEffect('fireflies');
+}
+
 app.initializers.add('stezkoy-time-of-magic', () => {
   applyMagicColors({
     progressBar: forumAttribute('timeOfMagicProgressBarColor'),
@@ -419,4 +435,5 @@ app.initializers.add('stezkoy-time-of-magic', () => {
   if (isEffectActive('clovers')) initClovers();
   if (isEffectActive('eggs')) initEggs();
   if (isEffectActive('lanterns')) initLanterns();
+  if (isEffectActive('fireflies')) initFireflies();
 });

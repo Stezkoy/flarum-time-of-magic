@@ -72,6 +72,10 @@ return [
             return (bool) $value;
         })
         ->serializeToForum('timeOfMagicLanternsDensity', 'stezkoy-time-of-magic.lanterns_density')
+        ->serializeToForum('timeOfMagicFireflies', 'stezkoy-time-of-magic.fireflies', function ($value) {
+            return (bool) $value;
+        })
+        ->serializeToForum('timeOfMagicFirefliesDensity', 'stezkoy-time-of-magic.fireflies_density')
         ->serializeToForum('timeOfMagicSchedules', 'stezkoy-time-of-magic.schedules', function ($value) {
             if (is_array($value)) {
                 return $value;
@@ -111,6 +115,8 @@ return [
         ->default('stezkoy-time-of-magic.eggs_density', 'medium')
         ->default('stezkoy-time-of-magic.lanterns', false)
         ->default('stezkoy-time-of-magic.lanterns_density', 'medium')
+        ->default('stezkoy-time-of-magic.fireflies', false)
+        ->default('stezkoy-time-of-magic.fireflies_density', 'medium')
         ->default('stezkoy-time-of-magic.schedules', '[]'),
 
     (new Extend\Locales(__DIR__.'/locale')),

@@ -3,7 +3,9 @@
 }
 
 .TimeOfMagicSettings-section + .TimeOfMagicSettings-section {
-  margin-top: 40px;
+  margin-top: 28px;
+  padding-top: 28px;
+  border-top: 1px solid var(--control-bg);
 }
 
 .TimeOfMagicSettings-sectionHeader h3 {
@@ -211,6 +213,35 @@
   align-items: center;
   gap: 10px;
   flex-shrink: 0;
+}
+
+@media (max-width: 767.98px) {
+  .TimeOfMagicSettings-scheduleCard {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+
+    &:hover {
+      transform: none;
+    }
+  }
+
+  .TimeOfMagicSettings-scheduleInfo {
+    min-width: 0;
+  }
+
+  .TimeOfMagicSettings-schedulePills {
+    justify-content: space-evenly;
+    min-width: 0;
+  }
+
+  .TimeOfMagicSettings-scheduleActions {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    padding-top: 10px;
+    border-top: 1px solid var(--control-bg);
+  }
 }
 
 .TimeOfMagicSettings-scheduleStatus {
