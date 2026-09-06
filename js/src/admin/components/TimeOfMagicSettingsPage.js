@@ -180,16 +180,21 @@ export default class TimeOfMagicSettingsPage extends ExtensionPage {
     const enabled = this.setting(key, '')() === '1';
 
     return m('.TimeOfMagicSettings-effectRow', [
-      m(Switch, {
-        state: enabled,
-        onchange: (value) => {
-          this.setting(key)(value ? '1' : '');
-          m.redraw();
-        },
-      }, app.translator.trans(PREFIX + '.admin.' + effect.label)),
+      m('span.TimeOfMagicSettings-effectName', {
+        title: app.translator.trans(PREFIX + '.admin.' + effect.label.replace('_label', '_description')),
+      },
+        m(Switch, {
+          state: enabled,
+          onchange: (value) => {
+            this.setting(key)(value ? '1' : '');
+            m.redraw();
+          },
+        }, app.translator.trans(PREFIX + '.admin.' + effect.label))
+      ),
       enabled
         ? m('select.FormControl.TimeOfMagicSettings-densitySelect', {
             value: this.setting(`${PREFIX}.${effect.value}_density`, 'medium')(),
+            title: app.translator.trans(PREFIX + '.admin.' + effect.value + '_density_description'),
             onchange: (e) => this.setting(`${PREFIX}.${effect.value}_density`)(e.target.value),
           }, this._densityOptions())
         : null,
