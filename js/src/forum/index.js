@@ -1,4 +1,9 @@
 import app from 'flarum/common/app';
+import { extend } from 'flarum/common/extend';
+import Switch from 'flarum/common/components/Switch';
+import FieldSet from 'flarum/common/components/FieldSet';
+
+const PREFIX = 'stezkoy-time-of-magic';
 
 function forumAttribute(name) {
   if (app.forum && typeof app.forum.attribute === 'function') {
@@ -16,6 +21,56 @@ function rand(min, max) {
 
 function capitalize(name) {
   return name.charAt(0).toUpperCase() + name.slice(1);
+}
+
+function userPreference(name) {
+  if (app.session && app.session.user) {
+    return app.session.user.preferences()?.[name];
+  }
+
+  const data = app.data || {};
+  const userId = data.session && data.session.userId;
+
+  if (!userId) return undefined;
+
+  const userResource = (data.resources || []).find(
+    (r) => r && r.type === 'users' && String(r.id) === String(userId)
+  );
+
+  return userResource && userResource.attributes && userResource.attributes.preferences
+    ? userResource.attributes.preferences[name]
+    : undefined;
+}
+
+function effectsDisabled() {
+  return !!userPreference('disableEffects');
+}
+
+function initUserSettings() {
+  if (!forumAttribute('timeOfMagicUserDisable')) return;
+
+  extend('flarum/forum/components/SettingsPage', 'settingsItems', function (items) {
+    items.add(
+      'timeOfMagicEffects',
+      <FieldSet
+        className="Settings-timeOfMagicEffects FieldSet--min"
+        label={app.translator.trans(PREFIX + '.forum.effects_section_heading')}
+        description={app.translator.trans(PREFIX + '.forum.effects_section_description', {}, true)}
+      >
+        <Switch
+          state={!!(app.session.user && app.session.user.preferences()?.disableEffects)}
+          onchange={(value) => {
+            app.session.user.savePreferences({ disableEffects: value }).then(() => m.redraw());
+          }}
+        >
+          {app.translator.trans(PREFIX + '.forum.disable_effects_label')}
+        </Switch>
+      </FieldSet>,
+      8
+    );
+
+    return items;
+  });
 }
 
 const FALLING_EFFECTS = {
@@ -410,6 +465,7 @@ app.initializers.add('stezkoy-time-of-magic', () => {
     clickSpark: forumAttribute('timeOfMagicClickSparkColor'),
   });
 
+  initUserSettings();
   initScrollbar();
   initSwapLayout();
   initBackground();
@@ -425,6 +481,8 @@ app.initializers.add('stezkoy-time-of-magic', () => {
   if (forumAttribute('timeOfMagicClickSpark')) {
     initClickSpark();
   }
+
+  if (effectsDisabled()) return;
 
   if (isEffectActive('snow')) initSnow();
   if (isEffectActive('leaves')) initLeaves();

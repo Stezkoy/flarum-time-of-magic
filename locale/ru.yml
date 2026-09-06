@@ -34,6 +34,8 @@ stezkoy-time-of-magic:
     click_spark_label: Искры при клике
     click_spark_description: Вспышка магических частиц в месте клика.
     click_spark_color_label: Цвет искр при клике
+    allow_user_disable_label: Разрешить пользователям отключать эффекты
+    allow_user_disable_description: Позволяет каждому пользователю отключать падающие эффекты на странице своих настроек.
     background_label: Фоновый паттерн
     background_none: Нет
     background_dots: Точки
@@ -104,3 +106,8 @@ stezkoy-time-of-magic:
     scheduler_modal_save: Сохранить
     scheduler_cancel_button: Отмена
     scheduler_no_effects: Эффекты не выбраны
+  forum:
+    effects_section_heading: Эффекты
+    effects_section_description: Управление визуальными эффектами на вашем аккаунте.
+    disable_effects_label: Отключить падающие эффекты
+    disable_effects_description: Скрыть падающие эффекты (снег, листья, дождь и другие) на форуме.

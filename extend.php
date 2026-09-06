@@ -12,6 +12,9 @@ return [
         ->css(__DIR__.'/less/admin.less'),
 
     (new Extend\Settings)
+        ->serializeToForum('timeOfMagicUserDisable', 'stezkoy-time-of-magic.allow_user_disable', function ($value) {
+            return (bool) $value;
+        })
         ->serializeToForum('timeOfMagicProgressBar', 'stezkoy-time-of-magic.progress_bar', function ($value) {
             return (bool) $value;
         })
@@ -117,7 +120,11 @@ return [
         ->default('stezkoy-time-of-magic.lanterns_density', 'medium')
         ->default('stezkoy-time-of-magic.fireflies', false)
         ->default('stezkoy-time-of-magic.fireflies_density', 'medium')
-        ->default('stezkoy-time-of-magic.schedules', '[]'),
+        ->default('stezkoy-time-of-magic.schedules', '[]')
+        ->default('stezkoy-time-of-magic.allow_user_disable', true),
+
+    (new Extend\User)
+        ->registerPreference('disableEffects', 'boolval', false),
 
     (new Extend\Locales(__DIR__.'/locale')),
 ];
