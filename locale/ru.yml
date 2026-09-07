@@ -38,13 +38,15 @@ stezkoy-time-of-magic:
     allow_user_disable_description: Позволяет каждому пользователю отключать падающие эффекты на странице своих настроек.
     custom_effects_title: Свой эффект
     custom_effects_description: Создайте собственные эффекты — частицы, поднимающиеся вверх, и частицы, падающие вниз. Они доступны в планировщике.
-    custom_up_label: Свой (вверх)
-    custom_down_label: Свой (вниз)
-    custom_effect_slot_description: '{slot} — вверх или вниз. Смайлы и количество настраиваются ниже, эффект также доступен в планировщике.'
+    custom_up_label: Свой эффект (вверх)
+    custom_down_label: Свой эффект (вниз)
+    custom_up_description: Частицы поднимаются вверх, как светлячки. Идеально для праздничных и магических тем.
+    custom_down_description: Частицы падают вниз, как снег или конфетти. Подходит для сезонных и тематических оформлений.
     custom_items_label: Смайлы
     custom_items_placeholder: 'Например: 🎈 🎉 🌟'
-    custom_count_label: Количество частиц
-    custom_count_description: Число от 1 до 100.
+    custom_emoji_link: Найти смайлы на emojipedia.org
+    custom_count_label: Количество
+    custom_count_description: От 1 до 100.
     background_label: Фоновый паттерн
     background_none: Нет
     background_dots: Точки

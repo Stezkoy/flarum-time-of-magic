@@ -88,6 +88,7 @@ export default class TimeOfMagicSettingsPage extends ExtensionPage {
       ),
 
       this._backgroundField(),
+      this.submitButton(),
     ]);
   }
 
@@ -118,17 +119,15 @@ export default class TimeOfMagicSettingsPage extends ExtensionPage {
 
   _effectsSection() {
     return this._section('section_effects', [
+      this._toggle(PREFIX + '.allow_user_disable', 'admin.allow_user_disable_label', 'admin.allow_user_disable_description'),
       m('.TimeOfMagicSettings-grid', EFFECT_OPTIONS.map((effect) => this._effectRow(effect))),
-      m('.TimeOfMagicSettings-effectsToggle',
-        this._toggle(PREFIX + '.allow_user_disable', 'admin.allow_user_disable_label', 'admin.allow_user_disable_description')
-      ),
       m('.TimeOfMagicSettings-customEffects',
         m('.TimeOfMagicSettings-customEffectsHeader',
           m('h4', app.translator.trans(PREFIX + '.admin.custom_effects_title')),
           m('p.helpText', app.translator.trans(PREFIX + '.admin.custom_effects_description'))
         ),
-        this._customEffectRow('up', this.customUp, 'custom_up_label'),
-        this._customEffectRow('down', this.customDown, 'custom_down_label'),
+        this._customEffectRow('up', this.customUp, 'custom_up_label', 'custom_up_description'),
+        this._customEffectRow('down', this.customDown, 'custom_down_label', 'custom_down_description'),
       ),
     ]);
   }
@@ -221,42 +220,51 @@ export default class TimeOfMagicSettingsPage extends ExtensionPage {
     ]);
   }
 
-  _customEffectRow(slot, conf, labelKey) {
+  _customEffectRow(slot, conf, labelKey, descKey) {
     return m('.TimeOfMagicSettings-customEffectRow', [
-      m(Switch, {
-        state: conf.enabled,
-        onchange: (value) => {
-          conf.enabled = !!value;
-          this._syncCustom(slot);
-        },
-      }, app.translator.trans(PREFIX + '.admin.' + labelKey)),
-      m('p.helpText', app.translator.trans(PREFIX + '.admin.custom_effect_slot_description', { slot: app.translator.trans(PREFIX + '.admin.' + labelKey) })),
-      m('.TimeOfMagicSettings-customField', [
-        m('label', app.translator.trans(PREFIX + '.admin.custom_items_label')),
-        m('input.FormControl', {
-          type: 'text',
-          value: conf.items,
-          placeholder: app.translator.trans(PREFIX + '.admin.custom_items_placeholder'),
-          oninput: (e) => {
-            conf.items = e.target.value;
+      m('.TimeOfMagicSettings-customEffectHeader', [
+        m(Switch, {
+          state: conf.enabled,
+          onchange: (value) => {
+            conf.enabled = !!value;
             this._syncCustom(slot);
           },
-        }),
+        }, app.translator.trans(PREFIX + '.admin.' + labelKey)),
+        m('p.helpText', app.translator.trans(PREFIX + '.admin.' + descKey)),
       ]),
-      m('.TimeOfMagicSettings-customField', [
-        m('label', app.translator.trans(PREFIX + '.admin.custom_count_label')),
-        m('input.FormControl', {
-          type: 'number',
-          min: 1,
-          max: 100,
-          value: String(conf.count),
-          oninput: (e) => {
-            const val = parseInt(e.target.value, 10);
-            conf.count = Number.isNaN(val) ? 1 : Math.min(100, Math.max(1, val));
-            this._syncCustom(slot);
-          },
-        }),
-        m('p.helpText', app.translator.trans(PREFIX + '.admin.custom_count_description')),
+      m('.TimeOfMagicSettings-customEffectFields', [
+        m('.TimeOfMagicSettings-customField', [
+          m('label', app.translator.trans(PREFIX + '.admin.custom_items_label')),
+          m('input.FormControl', {
+            type: 'text',
+            value: conf.items,
+            placeholder: '🎄 🎁 ⭐ 🎈',
+            oninput: (e) => {
+              conf.items = e.target.value;
+              this._syncCustom(slot);
+            },
+          }),
+          m('a.TimeOfMagicSettings-emojiLink', {
+            href: 'https://emojipedia.org',
+            target: '_blank',
+            rel: 'noopener noreferrer',
+          }, app.translator.trans(PREFIX + '.admin.custom_emoji_link')),
+        ]),
+        m('.TimeOfMagicSettings-customField.TimeOfMagicSettings-customField--count', [
+          m('label', app.translator.trans(PREFIX + '.admin.custom_count_label')),
+          m('input.FormControl', {
+            type: 'number',
+            min: 1,
+            max: 100,
+            value: String(conf.count),
+            oninput: (e) => {
+              const val = parseInt(e.target.value, 10);
+              conf.count = Number.isNaN(val) ? 1 : Math.min(100, Math.max(1, val));
+              this._syncCustom(slot);
+            },
+          }),
+          m('p.helpText', app.translator.trans(PREFIX + '.admin.custom_count_description')),
+        ]),
       ]),
     ]);
   }

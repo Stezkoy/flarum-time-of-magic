@@ -59,6 +59,21 @@ Red lanterns, dragons and lucky charms for Chinese New Year.
 Glowing fireflies rising through a summer night.
 - **Density:** Light (12 fireflies), Medium (25 fireflies), Heavy (40 fireflies)
 
+#### Custom Effects
+Create your own effects from your own emojis. Two slots are available:
+- **Custom (Up)** — particles rise upward like fireflies
+- **Custom (Down)** — particles fall downward like snow or confetti
+
+For each slot you can configure:
+- **Enabled** toggle
+- **Emojis** (space- or comma-separated), e.g. `🎄 🎁 ⭐ 🎈`
+- **Particle count** (1–100)
+
+Both custom effects are also available in the **Scheduler**. Get emojis from [emojipedia.org](https://emojipedia.org).
+
+### Disable Effects per User
+Each user can turn all falling effects off from their own **Settings → Effects** page. Admins enable/disable this option itself from the admin Effects section.
+
 ### Scheduler
 Automatically enable effects during a specific period of time. Create a schedule with a title, start and end date, pick the effects (each with its own density) and enable it — the effects will show whenever the schedule is active, even if the manual toggle is off.
 
