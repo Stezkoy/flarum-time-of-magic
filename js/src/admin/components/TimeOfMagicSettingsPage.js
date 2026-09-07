@@ -17,6 +17,13 @@ const EFFECT_OPTIONS = [
   { value: 'fireflies', label: 'fireflies_label' },
 ];
 
+const CUSTOM_EFFECT_OPTIONS = [
+  { value: 'custom_up', label: 'custom_up_label', custom: true },
+  { value: 'custom_down', label: 'custom_down_label', custom: true },
+];
+
+const ALL_EFFECT_OPTIONS = [...EFFECT_OPTIONS, ...CUSTOM_EFFECT_OPTIONS];
+
 const DENSITY_LABEL_MAP = {
   light: 'density_light',
   medium: 'density_medium',
@@ -27,6 +34,8 @@ export default class TimeOfMagicSettingsPage extends ExtensionPage {
   oninit(vnode) {
     super.oninit(vnode);
     this.schedules = this._parseSchedules(app.data.settings[PREFIX + '.schedules'] ?? '[]');
+    this.customUp = this._parseCustom(app.data.settings[PREFIX + '.custom_up'] ?? '{}');
+    this.customDown = this._parseCustom(app.data.settings[PREFIX + '.custom_down'] ?? '{}');
   }
 
   content() {
@@ -112,6 +121,14 @@ export default class TimeOfMagicSettingsPage extends ExtensionPage {
       m('.TimeOfMagicSettings-grid', EFFECT_OPTIONS.map((effect) => this._effectRow(effect))),
       m('.TimeOfMagicSettings-effectsToggle',
         this._toggle(PREFIX + '.allow_user_disable', 'admin.allow_user_disable_label', 'admin.allow_user_disable_description')
+      ),
+      m('.TimeOfMagicSettings-customEffects',
+        m('.TimeOfMagicSettings-customEffectsHeader',
+          m('h4', app.translator.trans(PREFIX + '.admin.custom_effects_title')),
+          m('p.helpText', app.translator.trans(PREFIX + '.admin.custom_effects_description'))
+        ),
+        this._customEffectRow('up', this.customUp, 'custom_up_label'),
+        this._customEffectRow('down', this.customDown, 'custom_down_label'),
       ),
     ]);
   }
@@ -204,6 +221,46 @@ export default class TimeOfMagicSettingsPage extends ExtensionPage {
     ]);
   }
 
+  _customEffectRow(slot, conf, labelKey) {
+    return m('.TimeOfMagicSettings-customEffectRow', [
+      m(Switch, {
+        state: conf.enabled,
+        onchange: (value) => {
+          conf.enabled = !!value;
+          this._syncCustom(slot);
+        },
+      }, app.translator.trans(PREFIX + '.admin.' + labelKey)),
+      m('p.helpText', app.translator.trans(PREFIX + '.admin.custom_effect_slot_description', { slot: app.translator.trans(PREFIX + '.admin.' + labelKey) })),
+      m('.TimeOfMagicSettings-customField', [
+        m('label', app.translator.trans(PREFIX + '.admin.custom_items_label')),
+        m('input.FormControl', {
+          type: 'text',
+          value: conf.items,
+          placeholder: app.translator.trans(PREFIX + '.admin.custom_items_placeholder'),
+          oninput: (e) => {
+            conf.items = e.target.value;
+            this._syncCustom(slot);
+          },
+        }),
+      ]),
+      m('.TimeOfMagicSettings-customField', [
+        m('label', app.translator.trans(PREFIX + '.admin.custom_count_label')),
+        m('input.FormControl', {
+          type: 'number',
+          min: 1,
+          max: 100,
+          value: String(conf.count),
+          oninput: (e) => {
+            const val = parseInt(e.target.value, 10);
+            conf.count = Number.isNaN(val) ? 1 : Math.min(100, Math.max(1, val));
+            this._syncCustom(slot);
+          },
+        }),
+        m('p.helpText', app.translator.trans(PREFIX + '.admin.custom_count_description')),
+      ]),
+    ]);
+  }
+
   _iconField() {
     return m('.Form-group', [
       m('label', app.translator.trans(PREFIX + '.admin.back_to_top_icon_label')),
@@ -225,7 +282,12 @@ export default class TimeOfMagicSettingsPage extends ExtensionPage {
   }
 
   _schedulePill(effect) {
-    const option = EFFECT_OPTIONS.find((o) => o.value === effect.name);
+    const option = ALL_EFFECT_OPTIONS.find((o) => o.value === effect.name);
+
+    if (option && option.custom) {
+      return m('span.TimeOfMagicSettings-schedulePill', app.translator.trans(PREFIX + '.admin.' + option.label));
+    }
+
     const label = option ? app.translator.trans(PREFIX + '.admin.' + option.label) : effect.name;
 
     return m('span.TimeOfMagicSettings-schedulePill', [
@@ -275,7 +337,7 @@ export default class TimeOfMagicSettingsPage extends ExtensionPage {
   _openModal(schedule) {
     app.modal.show(ScheduleModal, {
       schedule,
-      effects: EFFECT_OPTIONS,
+      effects: ALL_EFFECT_OPTIONS,
       save: (data) => {
         if (schedule) {
           this._replaceSchedule(schedule.id, data);
@@ -297,6 +359,33 @@ export default class TimeOfMagicSettingsPage extends ExtensionPage {
       }
     }
     return [];
+  }
+
+  _parseCustom(raw) {
+    let conf = {};
+
+    if (typeof raw === 'string' && raw) {
+      try {
+        conf = JSON.parse(raw);
+      } catch (e) {
+        conf = {};
+      }
+    } else if (raw && typeof raw === 'object') {
+      conf = raw;
+    }
+
+    const items = String(conf.items || '');
+    let count = parseInt(conf.count, 10);
+    if (Number.isNaN(count) || count < 1) count = 20;
+    count = Math.min(100, Math.max(1, count));
+
+    return { enabled: !!conf.enabled, items, count };
+  }
+
+  _syncCustom(slot) {
+    const conf = slot === 'up' ? this.customUp : this.customDown;
+    this.setting(PREFIX + '.custom_' + slot)(JSON.stringify({ enabled: conf.enabled, items: conf.items, count: conf.count }));
+    m.redraw();
   }
 
   _syncSchedules() {

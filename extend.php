@@ -88,6 +88,24 @@ return [
 
             return is_array($decoded) ? $decoded : [];
         })
+        ->serializeToForum('timeOfMagicCustomUp', 'stezkoy-time-of-magic.custom_up', function ($value) {
+            if (is_array($value)) {
+                return $value;
+            }
+
+            $decoded = json_decode((string) $value, true);
+
+            return is_array($decoded) ? $decoded : [];
+        })
+        ->serializeToForum('timeOfMagicCustomDown', 'stezkoy-time-of-magic.custom_down', function ($value) {
+            if (is_array($value)) {
+                return $value;
+            }
+
+            $decoded = json_decode((string) $value, true);
+
+            return is_array($decoded) ? $decoded : [];
+        })
         ->default('stezkoy-time-of-magic.progress_bar', false)
         ->default('stezkoy-time-of-magic.progress_bar_color', '')
         ->default('stezkoy-time-of-magic.back_to_top', false)
@@ -121,6 +139,8 @@ return [
         ->default('stezkoy-time-of-magic.fireflies', false)
         ->default('stezkoy-time-of-magic.fireflies_density', 'medium')
         ->default('stezkoy-time-of-magic.schedules', '[]')
+        ->default('stezkoy-time-of-magic.custom_up', '[]')
+        ->default('stezkoy-time-of-magic.custom_down', '[]')
         ->default('stezkoy-time-of-magic.allow_user_disable', true),
 
     (new Extend\User)

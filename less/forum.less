@@ -292,6 +292,38 @@ html {
   animation-iteration-count: infinite, infinite;
 }
 
+@keyframes timeofmagic-custom-rise {
+  0% { top: 110%; }
+  100% { top: -10%; }
+}
+
+@keyframes timeofmagic-custom-fall {
+  0% { top: -10%; }
+  100% { top: 100%; }
+}
+
+@keyframes timeofmagic-custom-sway {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(25px); }
+  50% { transform: translateX(-15px); }
+  75% { transform: translateX(20px); }
+  100% { transform: translateX(0); }
+}
+
+.timeofmagic-custom-up {
+  top: 110%;
+  animation-name: timeofmagic-custom-rise, timeofmagic-custom-sway;
+  animation-timing-function: linear, ease-in-out;
+  animation-iteration-count: infinite, infinite;
+}
+
+.timeofmagic-custom-down {
+  top: -10%;
+  animation-name: timeofmagic-custom-fall, timeofmagic-custom-sway;
+  animation-timing-function: linear, ease-in-out;
+  animation-iteration-count: infinite, infinite;
+}
+
 body.timeofmagic-bg-dots {
   background-image: radial-gradient(circle, rgba(128, 128, 128, 0.12) 1px, transparent 1px) !important;
   background-size: 20px 20px !important;
@@ -354,6 +386,10 @@ html.timeofmagic-custom-scrollbar::-webkit-scrollbar-thumb:hover {
 
 html.timeofmagic-swap-layout .Page-container {
   flex-direction: row-reverse;
+}
+
+html.timeofmagic-swap-layout .Page--vertical .Page-container {
+  flex-direction: column;
 }
 
 @media (min-width: 992px) {

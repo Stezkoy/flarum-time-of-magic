@@ -282,9 +282,33 @@ function isEffectActive(kind) {
   return !!forumAttribute('timeOfMagic' + capitalize(kind)) || isScheduled(kind);
 }
 
-function createFallingEffect(kind, count) {
-  const cfg = FALLING_EFFECTS[kind];
+function getCustomConfig(slot) {
+  const raw = forumAttribute(slot === 'up' ? 'timeOfMagicCustomUp' : 'timeOfMagicCustomDown');
+  let cfg = {};
 
+  if (typeof raw === 'string' && raw) {
+    try {
+      cfg = JSON.parse(raw);
+    } catch (e) {
+      cfg = {};
+    }
+  } else if (raw && typeof raw === 'object') {
+    cfg = raw;
+  }
+
+  const items = String(cfg.items || '')
+    .split(/[\s,]+/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+
+  let count = parseInt(cfg.count, 10);
+  if (Number.isNaN(count) || count < 1) count = 20;
+  count = Math.min(100, Math.max(1, count));
+
+  return { enabled: !!cfg.enabled, items, count };
+}
+
+function createFallingEffect(cfg, count) {
   const container = document.createElement('div');
   container.id = cfg.containerId;
   container.className = 'timeofmagic-layer';
@@ -413,8 +437,33 @@ function initClickSpark() {
 
 function initFallingEffect(kind) {
   const density = scheduledDensity(kind) || forumAttribute('timeOfMagic' + capitalize(kind) + 'Density') || 'medium';
-  const counts = FALLING_EFFECTS[kind].counts;
-  createFallingEffect(kind, counts[density] || counts.medium);
+  const cfg = FALLING_EFFECTS[kind];
+  createFallingEffect(cfg, cfg.counts[density] || cfg.counts.medium);
+}
+
+function isCustomActive(slot) {
+  return getCustomConfig(slot).enabled || isScheduled('custom_' + slot);
+}
+
+function initCustomEffect(slot) {
+  const cfg = getCustomConfig(slot);
+  if (!cfg.items.length) return;
+
+  const customCfg = {
+    containerId: 'timeofmagic-custom-' + slot,
+    className: slot === 'up' ? 'timeofmagic-custom-up' : 'timeofmagic-custom-down',
+    items: cfg.items,
+    counts: { light: cfg.count, medium: cfg.count, heavy: cfg.count },
+    fallDelay: [0, 10],
+    fallDuration: slot === 'up' ? [9, 16] : [7, 13],
+    swayDelay: [0, 5],
+    swayDuration: [2, 5],
+    opacity: [0.6, 1],
+    fontScale: [0.8, 1.6],
+    dualAnimation: true,
+  };
+
+  createFallingEffect(customCfg, cfg.count);
 }
 
 function initSnow() {
@@ -494,4 +543,6 @@ app.initializers.add('stezkoy-time-of-magic', () => {
   if (isEffectActive('eggs')) initEggs();
   if (isEffectActive('lanterns')) initLanterns();
   if (isEffectActive('fireflies')) initFireflies();
+  if (isCustomActive('up')) initCustomEffect('up');
+  if (isCustomActive('down')) initCustomEffect('down');
 });

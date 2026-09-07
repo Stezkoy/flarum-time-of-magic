@@ -15,9 +15,11 @@ export default class ScheduleModal extends Modal {
     this.end = schedule ? schedule.end || '' : '';
     this.enabled = schedule ? !!schedule.enabled : true;
     this.selectedEffects = (schedule ? schedule.effects : [])
-      .map((effect) =>
-        typeof effect === 'string' ? { name: effect, density: 'medium' } : { name: effect.name, density: effect.density || 'medium' }
-      );
+      .map((effect) => {
+        const name = typeof effect === 'string' ? effect : effect.name;
+        const custom = this.attrs.effects.some((o) => o.value === name && o.custom);
+        return { name, density: custom ? null : (typeof effect === 'object' && effect.density ? effect.density : 'medium') };
+      });
   }
 
   className() {
@@ -106,7 +108,7 @@ export default class ScheduleModal extends Modal {
           state: !!selected,
           onchange: (checked) => {
             if (checked) {
-              this.selectedEffects.push({ name: effect.value, density: 'medium' });
+              this.selectedEffects.push({ name: effect.value, density: effect.custom ? null : 'medium' });
             } else {
               this.selectedEffects = this.selectedEffects.filter((x) => x.name !== effect.value);
             }
@@ -115,16 +117,18 @@ export default class ScheduleModal extends Modal {
         },
         app.translator.trans(PREFIX + '.admin.' + effect.label)
       ),
-      m('select.FormControl.TimeOfMagicModal-density' + (selected ? '' : '.is-disabled'), {
-        disabled: !selected,
-        value: selected ? selected.density || 'medium' : 'medium',
-        onchange: (e) => {
-          if (selected) {
-            selected.density = e.target.value;
-            m.redraw();
-          }
-        },
-      }, this._densityOptions()),
+      effect.custom
+        ? null
+        : m('select.FormControl.TimeOfMagicModal-density' + (selected ? '' : '.is-disabled'), {
+            disabled: !selected,
+            value: selected ? selected.density || 'medium' : 'medium',
+            onchange: (e) => {
+              if (selected) {
+                selected.density = e.target.value;
+                m.redraw();
+              }
+            },
+          }, this._densityOptions()),
     ]);
   }
 
@@ -147,7 +151,9 @@ export default class ScheduleModal extends Modal {
       start: this.start,
       end: this.end,
       enabled: this.enabled,
-      effects: this.selectedEffects.map((effect) => ({ name: effect.name, density: effect.density || 'medium' })),
+      effects: this.selectedEffects.map((effect) =>
+        effect.density ? { name: effect.name, density: effect.density } : { name: effect.name }
+      ),
     });
 
     this.hide();
