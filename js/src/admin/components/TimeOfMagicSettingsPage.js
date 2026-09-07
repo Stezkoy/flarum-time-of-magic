@@ -119,7 +119,9 @@ export default class TimeOfMagicSettingsPage extends ExtensionPage {
 
   _effectsSection() {
     return this._section('section_effects', [
-      this._toggle(PREFIX + '.allow_user_disable', 'admin.allow_user_disable_label', 'admin.allow_user_disable_description'),
+      m('.TimeOfMagicSettings-interfaceRow',
+        this._toggle(PREFIX + '.allow_user_disable', 'admin.allow_user_disable_label', 'admin.allow_user_disable_description')
+      ),
       m('.TimeOfMagicSettings-grid', EFFECT_OPTIONS.map((effect) => this._effectRow(effect))),
       m('.TimeOfMagicSettings-customEffects',
         m('.TimeOfMagicSettings-customEffectsHeader',
