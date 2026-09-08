@@ -16,6 +16,32 @@ A floating button that appears after scrolling down. Click it to smoothly scroll
 - Choose between **circle** or **rounded square** shape
 - Use any **FontAwesome icon** (e.g. `fa-solid fa-chevron-up`, `fa-solid fa-angle-double-up`)
 
+### Custom Scrollbar
+Replaces the default browser scrollbar with a thin, themed one that matches your site colors.
+
+### Click Spark
+A burst of sparkles from your cursor on every click. A fun little touch that adds magic to the whole site.
+
+### Swap Sidebar & Content
+Moves the sidebar to the right and discussion list to the left, giving your forum a unique layout.
+
+### Background Patterns
+Subtle background patterns that work on both light and dark themes:
+- Dots
+- Grid
+- Diagonal lines
+- Waves
+- Hexagons
+
+### Per-Feature Accent Colors
+Each colored feature is individually customizable and defaults to your forum's color when left empty:
+- Progress bar color
+- Back to top button color
+- Custom scrollbar color
+- Click spark color
+
+Accepts any CSS color, e.g. `#00a185`, `red`, `rgb(255, 0, 0)` — or leave empty to use your forum color.
+
 ### Falling effects
 Every falling effect has **3 density levels** — Light, Medium and Heavy.
 
@@ -76,32 +102,6 @@ Each user can turn all falling effects off from their own **Settings → Effects
 
 ### Scheduler
 Automatically enable effects during a specific period of time. Create a schedule with a title, start and end date, pick the effects (each with its own density) and enable it — the effects will show whenever the schedule is active, even if the manual toggle is off.
-
-### Custom Scrollbar
-Replaces the default browser scrollbar with a thin, themed one that matches your site colors.
-
-### Click Spark
-A burst of sparkles from your cursor on every click. A fun little touch that adds magic to the whole site.
-
-### Swap Sidebar & Content
-Moves the sidebar to the right and discussion list to the left, giving your forum a unique layout.
-
-### Background Patterns
-Subtle background patterns that work on both light and dark themes:
-- Dots
-- Grid
-- Diagonal lines
-- Waves
-- Hexagons
-
-### Per-Feature Accent Colors
-Each colored feature is individually customizable and defaults to your forum's color when left empty:
-- Progress bar color
-- Back to top button color
-- Custom scrollbar color
-- Click spark color
-
-Accepts any CSS color, e.g. `#00a185`, `red`, `rgb(255, 0, 0)` — or leave empty to use your forum color.
 
 ## Installation
 
