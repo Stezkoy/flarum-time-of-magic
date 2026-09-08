@@ -41,55 +41,57 @@ export default class TimeOfMagicSettingsPage extends ExtensionPage {
   content() {
     return m('.ExtensionPage-settings', m('.container', [
       m('.TimeOfMagicSettings', [
-        this._interfaceSection(),
+        ...this._interfaceSection(),
         this._effectsSection(),
         this._schedulerSection(),
-        m('.Form-group.Form-controls', this.submitButton()),
+      m('.Form-group.Form-controls.Form-controls--section', this.submitButton()),
       ]),
     ]));
   }
 
   _interfaceSection() {
-    return this._section('section_interface', [
-      this._interfaceRow(
-        PREFIX + '.progress_bar',
-        'admin.progress_bar_label',
-        'admin.progress_bar_description',
-        this.setting(PREFIX + '.progress_bar', '')() === '1' ? this._colorField(PREFIX + '.progress_bar_color', 'admin.progress_bar_color_label') : null
-      ),
+    return [
+      this._section('section_interface', [
+        this._interfaceRow(
+          PREFIX + '.progress_bar',
+          'admin.progress_bar_label',
+          'admin.progress_bar_description',
+          this.setting(PREFIX + '.progress_bar', '')() === '1' ? this._colorField(PREFIX + '.progress_bar_color', 'admin.progress_bar_color_label') : null
+        ),
 
-      this._interfaceRow(
-        PREFIX + '.back_to_top',
-        'admin.back_to_top_label',
-        'admin.back_to_top_description',
-        this.setting(PREFIX + '.back_to_top', '')() === '1'
-          ? m('.TimeOfMagicSettings-indent', [
-              this._toggle(PREFIX + '.back_to_top_rounded', 'admin.back_to_top_shape_label', 'admin.back_to_top_shape_description'),
-              this._iconField(),
-              this._colorField(PREFIX + '.back_to_top_color', 'admin.back_to_top_color_label'),
-            ])
-          : null
-      ),
+        this._interfaceRow(
+          PREFIX + '.back_to_top',
+          'admin.back_to_top_label',
+          'admin.back_to_top_description',
+          this.setting(PREFIX + '.back_to_top', '')() === '1'
+            ? m('.TimeOfMagicSettings-indent', [
+                this._toggle(PREFIX + '.back_to_top_rounded', 'admin.back_to_top_shape_label', 'admin.back_to_top_shape_description'),
+                this._iconField(),
+                this._colorField(PREFIX + '.back_to_top_color', 'admin.back_to_top_color_label'),
+              ])
+            : null
+        ),
 
-      this._interfaceRow(
-        PREFIX + '.scrollbar',
-        'admin.scrollbar_label',
-        'admin.scrollbar_description',
-        this.setting(PREFIX + '.scrollbar', '')() === '1' ? this._colorField(PREFIX + '.scrollbar_color', 'admin.scrollbar_color_label') : null
-      ),
+        this._interfaceRow(
+          PREFIX + '.scrollbar',
+          'admin.scrollbar_label',
+          'admin.scrollbar_description',
+          this.setting(PREFIX + '.scrollbar', '')() === '1' ? this._colorField(PREFIX + '.scrollbar_color', 'admin.scrollbar_color_label') : null
+        ),
 
-      this._interfaceRow(PREFIX + '.swap_layout', 'admin.swap_layout_label', 'admin.swap_layout_description'),
+        this._interfaceRow(PREFIX + '.swap_layout', 'admin.swap_layout_label', 'admin.swap_layout_description'),
 
-      this._interfaceRow(
-        PREFIX + '.click_spark',
-        'admin.click_spark_label',
-        'admin.click_spark_description',
-        this.setting(PREFIX + '.click_spark', '')() === '1' ? this._colorField(PREFIX + '.click_spark_color', 'admin.click_spark_color_label') : null
-      ),
+        this._interfaceRow(
+          PREFIX + '.click_spark',
+          'admin.click_spark_label',
+          'admin.click_spark_description',
+          this.setting(PREFIX + '.click_spark', '')() === '1' ? this._colorField(PREFIX + '.click_spark_color', 'admin.click_spark_color_label') : null
+        ),
 
-      this._backgroundField(),
-      this.submitButton(),
-    ]);
+        this._backgroundField(),
+      ]),
+      m('.Form-group.Form-controls', this.submitButton()),
+    ];
   }
 
   _interfaceRow(key, labelKey, descKey, extra) {
@@ -312,7 +314,7 @@ export default class TimeOfMagicSettingsPage extends ExtensionPage {
 
   _section(titleKey, children) {
     return m('.TimeOfMagicSettings-section', [
-      m('.TimeOfMagicSettings-sectionHeader', m('h3', app.translator.trans(PREFIX + '.admin.' + titleKey))),
+      m('h3', app.translator.trans(PREFIX + '.admin.' + titleKey)),
       m('.TimeOfMagicSettings-sectionBody', children),
     ]);
   }
