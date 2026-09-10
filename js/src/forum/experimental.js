@@ -7,16 +7,20 @@ import { forumAttribute, isInteractiveClick, rand } from './util';
 // "_experimentalSection" and related LESS/locale keys) to remove these effects.
 // ============================================================================
 
+function attr(name) {
+  return 'timeOfMagic' + name.split('_').map((p) => capitalize(p)).join('');
+}
+
 function on(name) {
-  return !!forumAttribute('timeOfMagic' + capitalize(name));
+  return !!forumAttribute(attr(name));
 }
 
 function text(name, fallback = '') {
-  return forumAttribute('timeOfMagic' + capitalize(name)) || fallback;
+  return forumAttribute(attr(name)) || fallback;
 }
 
 function itemsList(name, fallback) {
-  const raw = String(forumAttribute('timeOfMagic' + capitalize(name)) ?? '')
+  const raw = String(forumAttribute(attr(name)) ?? '')
     .split(/[\s,]+/)
     .map((s) => s.trim())
     .filter(Boolean);
@@ -83,12 +87,15 @@ function initBackgroundParallax() {
 function initCursorFlashlight() {
   const light = document.createElement('div');
   light.id = 'timeofmagic-flashlight';
+  light.classList.add('is-off');
   light.setAttribute('aria-hidden', 'true');
   document.body.appendChild(light);
 
   let raf = null;
 
   document.addEventListener('mousemove', (e) => {
+    light.classList.remove('is-off');
+
     if (raf) return;
     raf = requestAnimationFrame(() => {
       raf = null;
