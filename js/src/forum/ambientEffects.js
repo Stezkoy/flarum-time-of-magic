@@ -1,5 +1,4 @@
-import { forumAttribute } from './util';
-import { rand } from './util';
+import { forumAttribute, rand } from './util';
 
 // Background parallax — subtle background shift following the cursor
 export function initBackgroundParallax() {
