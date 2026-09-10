@@ -1,5 +1,6 @@
 {
   "name": "stezkoy/flarum-time-of-magic",
+  "version": "1.4.0",
   "description": "Adds a touch of magic to your Flarum site",
   "support": {
     "source": "https://github.com/Stezkoy/flarum-time-of-magic",
