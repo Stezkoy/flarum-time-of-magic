@@ -341,7 +341,7 @@ export default class TimeOfMagicSettingsPage extends ExtensionPage {
   _colorField(key, labelKey) {
     return m(ColorField, {
       page: this,
-      key,
+      settingKey: key,
       labelKey,
       placeholderKey: 'admin.color_placeholder',
       helpKey: 'admin.color_description',

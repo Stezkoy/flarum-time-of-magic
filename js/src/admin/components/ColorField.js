@@ -5,8 +5,8 @@ const HEX_RE = /^#(?:[0-9a-f]{3}|[0-9a-f]{6})$/i;
 
 export default class ColorField extends Component {
   view(vnode) {
-    const { key, labelKey, placeholderKey, helpKey } = this.attrs;
-    const value = this.settingValue(key);
+    const { settingKey, labelKey, placeholderKey, helpKey } = this.attrs;
+    const value = this.settingValue(settingKey);
 
     return m('.Form-group.TimeOfMagicSettings-colorField', [
       m('label', app.translator.trans(PREFIX + '.' + labelKey)),
@@ -15,12 +15,12 @@ export default class ColorField extends Component {
           type: 'text',
           value,
           placeholder: app.translator.trans(PREFIX + '.' + placeholderKey),
-          oninput: (e) => this.setValue(key, e.target.value),
+          oninput: (e) => this.setValue(settingKey, e.target.value),
         }),
         m('input.TimeOfMagicSettings-colorSwatch', {
           type: 'color',
           value: HEX_RE.test(value) ? value : '#000000',
-          oninput: (e) => this.setValue(key, e.target.value),
+          oninput: (e) => this.setValue(settingKey, e.target.value),
         }),
       ]),
       m('p.helpText', app.translator.trans(PREFIX + '.' + helpKey)),
