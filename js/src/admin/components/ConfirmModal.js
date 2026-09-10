@@ -1,7 +1,6 @@
 import Modal from 'flarum/common/components/Modal';
 import Button from 'flarum/common/components/Button';
-
-const PREFIX = 'stezkoy-time-of-magic';
+import { PREFIX } from '../../common';
 
 export default class ConfirmModal extends Modal {
   oninit(vnode) {

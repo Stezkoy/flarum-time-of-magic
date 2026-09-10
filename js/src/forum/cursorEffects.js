@@ -17,11 +17,12 @@ function itemsList(name, fallback) {
 // Cursor trail — fading particles following the cursor
 export function initCursorTrail() {
   const emojis = itemsList('trail_items', ['✦', '✨']);
+  let last = 0;
 
   document.addEventListener('mousemove', (e) => {
     const now = Date.now();
-    if (now - (initCursorTrail.last || 0) < 60) return;
-    initCursorTrail.last = now;
+    if (now - last < 60) return;
+    last = now;
 
     const el = document.createElement('div');
     el.className = 'timeofmagic-trail-particle timeofmagic-particle';
@@ -38,7 +39,13 @@ export function initCursorTrail() {
 
 // Cursor dust — occasional tiny glowing dots around the cursor
 export function initCursorDust() {
+  let last = 0;
+
   document.addEventListener('mousemove', (e) => {
+    const now = Date.now();
+    if (now - last < 80) return;
+    last = now;
+
     if (Math.random() > 0.15) return;
 
     const dot = document.createElement('div');
