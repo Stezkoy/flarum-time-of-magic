@@ -70,14 +70,15 @@ function initCursorDust() {
 
 // Background parallax — subtle background shift following the cursor
 function initBackgroundParallax() {
+  document.documentElement.classList.add('timeofmagic-bg-parallax');
   let raf = null;
 
   document.addEventListener('mousemove', (e) => {
     if (raf) return;
     raf = requestAnimationFrame(() => {
       raf = null;
-      const x = (e.clientX / window.innerWidth - 0.5) * 12;
-      const y = (e.clientY / window.innerHeight - 0.5) * 12;
+      const x = (e.clientX / window.innerWidth - 0.5) * 30;
+      const y = (e.clientY / window.innerHeight - 0.5) * 30;
       document.body.style.backgroundPosition = `${x.toFixed(1)}px ${y.toFixed(1)}px`;
     });
   });
