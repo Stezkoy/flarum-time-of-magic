@@ -123,6 +123,28 @@ stezkoy-time-of-magic:
     scheduler_modal_save: Сохранить
     scheduler_cancel_button: Отмена
     scheduler_no_effects: Эффекты не выбраны
+    section_experimental: Эксперименты
+    experimental_description: Экспериментальные эффекты курсора и фона. Могут влиять на производительность слабых устройств — используйте аккуратно. Легко удаляются из сборки.
+    cursor_trail_label: След за курсором
+    cursor_trail_description: Частицы тают и следуют за курсором мыши.
+    trail_items_label: Частицы следа (эмодзи/символы через пробел)
+    cursor_dust_label: Пыль у курсора
+    cursor_dust_description: Изредка вокруг курсора вспыхивают светящиеся точки.
+    bg_parallax_label: Параллакс фона
+    bg_parallax_description: Фоновый узор слегка смещается за курсором.
+    cursor_flashlight_label: Фонарик курсора
+    cursor_flashlight_description: Мягкая тёмная пальма со световым пятном у курсора. Лучше всего на тёмных темах.
+    starfield_label: Звёздное небо
+    starfield_description: Стационарный слой мерцающих звёзд.
+    click_burst_label: Взрыв по клику
+    click_burst_description: Ваши эмодзи «выстреливают» из точки клика.
+    click_burst_items_label: Частицы взрыва (эмодзи через пробел)
+    fog_label: Туман
+    fog_description: Медленно плывущие полупрозрачные пятна тумана.
+    site_tint_label: Оттенок сайта
+    site_tint_description: Полупрозрачный цветовой слой поверх всей страницы.
+    site_tint_color_label: Цвет оттенка
+
   forum:
     effects_section_heading: Эффекты
     effects_section_description: Управление визуальными эффектами на вашем аккаунте.

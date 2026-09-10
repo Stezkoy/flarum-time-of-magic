@@ -44,6 +44,7 @@ export default class TimeOfMagicSettingsPage extends ExtensionPage {
       m('.TimeOfMagicSettings', [
         ...this._interfaceSection(),
         this._effectsSection(),
+        this._experimentalSection(),
         this._schedulerSection(),
       m('.Form-group.Form-controls.Form-controls--section', this.submitButton()),
       ]),
@@ -135,6 +136,67 @@ export default class TimeOfMagicSettingsPage extends ExtensionPage {
         this._customEffectRow('up', this.customUp, 'custom_up_label', 'custom_up_description'),
         this._customEffectRow('down', this.customDown, 'custom_down_label', 'custom_down_description'),
       ),
+    ]);
+  }
+
+  _experimentRow(key, labelKey, descKey, extra) {
+    return m('.TimeOfMagicSettings-interfaceRow', [
+      this._toggle(key, labelKey, descKey),
+      extra || null,
+    ]);
+  }
+
+  _experimentalSection() {
+    return this._section('section_experimental', [
+      m('p.helpText', app.translator.trans(PREFIX + '.admin.experimental_description')),
+
+      this._experimentRow(
+        PREFIX + '.cursor_trail',
+        'admin.cursor_trail_label',
+        'admin.cursor_trail_description',
+        this.setting(PREFIX + '.cursor_trail', '')() === '1'
+          ? this._itemListField(PREFIX + '.trail_items', 'admin.trail_items_label')
+          : null
+      ),
+
+      this._experimentRow(PREFIX + '.cursor_dust', 'admin.cursor_dust_label', 'admin.cursor_dust_description'),
+
+      this._experimentRow(PREFIX + '.bg_parallax', 'admin.bg_parallax_label', 'admin.bg_parallax_description'),
+
+      this._experimentRow(PREFIX + '.cursor_flashlight', 'admin.cursor_flashlight_label', 'admin.cursor_flashlight_description'),
+
+      this._experimentRow(PREFIX + '.starfield', 'admin.starfield_label', 'admin.starfield_description'),
+
+      this._experimentRow(
+        PREFIX + '.click_burst',
+        'admin.click_burst_label',
+        'admin.click_burst_description',
+        this.setting(PREFIX + '.click_burst', '')() === '1'
+          ? this._itemListField(PREFIX + '.click_burst_items', 'admin.click_burst_items_label')
+          : null
+      ),
+
+      this._experimentRow(PREFIX + '.fog', 'admin.fog_label', 'admin.fog_description'),
+
+      this._experimentRow(
+        PREFIX + '.site_tint',
+        'admin.site_tint_label',
+        'admin.site_tint_description',
+        this.setting(PREFIX + '.site_tint', '')() === '1'
+          ? this._colorField(PREFIX + '.site_tint_color', 'admin.site_tint_color_label')
+          : null
+      ),
+    ]);
+  }
+
+  _itemListField(key, labelKey) {
+    return m('.Form-group', [
+      m('label', app.translator.trans(PREFIX + '.' + labelKey)),
+      m('input.FormControl', {
+        type: 'text',
+        value: this.setting(key, '')(),
+        oninput: (e) => this.setting(key)(e.target.value),
+      }),
     ]);
   }
 

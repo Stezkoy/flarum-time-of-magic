@@ -123,6 +123,27 @@ stezkoy-time-of-magic:
     scheduler_modal_save: Save
     scheduler_cancel_button: Cancel
     scheduler_no_effects: No effects selected
+    section_experimental: Experimental
+    experimental_description: Experimental cursor and ambient effects. They may affect performance on weak devices — use carefully. Totally safe to remove from the build.
+    cursor_trail_label: Cursor trail
+    cursor_trail_description: Fading particles follow your mouse cursor.
+    trail_items_label: Trail particles (emoji/chars, space separated)
+    cursor_dust_label: Cursor dust
+    cursor_dust_description: Occasional tiny glowing dots appear around the cursor.
+    bg_parallax_label: Background parallax
+    bg_parallax_description: The background pattern subtly shifts following the cursor.
+    cursor_flashlight_label: Cursor flashlight
+    cursor_flashlight_description: A soft dark overlay with a light spot around the cursor. Best on dark themes.
+    starfield_label: Starfield
+    starfield_description: A static layer of twinkling stars.
+    click_burst_label: Click burst
+    click_burst_description: Your emoji explodes from the click point.
+    click_burst_items_label: Burst particles (emoji, space separated)
+    fog_label: Fog
+    fog_description: Slow drifting translucent fog blobs.
+    site_tint_label: Site tint
+    site_tint_description: Translucent color overlay across the whole page.
+    site_tint_color_label: Tint color
   forum:
     effects_section_heading: Effects
     effects_section_description: Control how visual effects behave on your account.

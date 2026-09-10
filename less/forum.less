@@ -436,3 +436,103 @@ html.timeofmagic-swap-layout .Page--vertical .Page-container {
     opacity: 0;
   }
 }
+// ================= EXPERIMENTAL BLOCK =================
+
+.timeofmagic-trail-particle {
+  position: fixed;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  user-select: none;
+  z-index: 9999;
+  animation: timeofmagic-trail-fade 0.8s ease-out forwards;
+}
+
+@keyframes timeofmagic-trail-fade {
+  0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -80%) scale(0.4); }
+}
+
+.timeofmagic-dust-dot {
+  position: fixed;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--timeofmagic-accent-spark);
+  box-shadow: 0 0 6px var(--timeofmagic-accent-spark);
+  pointer-events: none;
+  z-index: 9999;
+  animation: timeofmagic-dust-fade 1.2s ease-out forwards;
+}
+
+@keyframes timeofmagic-dust-fade {
+  0% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: translateY(-14px) scale(0.3); }
+}
+
+#timeofmagic-flashlight {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  --x: -9999px;
+  --y: -9999px;
+  background: radial-gradient(
+    circle 220px at var(--x) var(--y),
+    transparent 0,
+    rgba(0, 0, 0, 0.45) 65%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+}
+
+.timeofmagic-star {
+  position: absolute;
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.9);
+  animation-name: timeofmagic-star-twinkle;
+  animation-iteration-count: infinite;
+}
+
+@keyframes timeofmagic-star-twinkle {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 1; }
+}
+
+.timeofmagic-burst-particle {
+  position: fixed;
+  font-size: 1em;
+  pointer-events: none;
+  user-select: none;
+  z-index: 9999;
+  animation: timeofmagic-burst-fly 0.8s ease-out forwards;
+}
+
+@keyframes timeofmagic-burst-fly {
+  0% { opacity: 1; transform: translate(-50%, -50%) scale(0.4); }
+  100% { opacity: 0; transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.3); }
+}
+
+.timeofmagic-fog-blob {
+  position: absolute;
+  width: 45vw;
+  height: 30vh;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(160, 160, 160, 0.16) 0%, transparent 70%);
+  filter: blur(30px);
+  animation: timeofmagic-fog-drift 40s ease-in-out infinite alternate;
+}
+
+@keyframes timeofmagic-fog-drift {
+  0% { transform: translateX(-10vw); }
+  100% { transform: translateX(60vw); }
+}
+
+#timeofmagic-site-tint {
+  position: fixed;
+  inset: 0;
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 9998;
+}
+
+// ============ end of EXPERIMENTAL BLOCK ==============

@@ -34,6 +34,16 @@ $effectKeys = [
 
 $jsonKeys = ['schedules', 'custom_up', 'custom_down'];
 
+$plainKeys = [
+    'back_to_top_icon',
+    'background',
+    'progress_bar_color',
+    'back_to_top_color',
+    'back_to_top_icon_color',
+    'scrollbar_color',
+    'click_spark_color',
+];
+
 $defaultMap = [
     'schedules' => '[]',
     'custom_up' => '[]',
@@ -42,13 +52,39 @@ $defaultMap = [
     'allow_user_disable' => true,
 ];
 
+// === EXPERIMENTAL BLOCK ========================================================
+// Cut this block (plus js/src/forum/experimental.js, its import/init call in
+// js/src/forum/index.js, the admin "_experimental..." section and the related
+// LESS/locale keys) to remove the experimental effects.
+$experimentalKeys = [
+    'cursor_trail',
+    'cursor_dust',
+    'bg_parallax',
+    'cursor_flashlight',
+    'starfield',
+    'click_burst',
+    'fog',
+    'site_tint',
+];
+
+$experimentalPlain = [
+    'trail_items' => '✦ ✨',
+    'click_burst_items' => '✨ 💥 ⭐',
+    'site_tint_color' => '',
+];
+
+$boolKeys = [...$boolKeys, ...$experimentalKeys];
+$plainKeys = [...$plainKeys, ...array_keys($experimentalPlain)];
+$defaultMap = [...$defaultMap, ...$experimentalPlain];
+// === END OF EXPERIMENTAL BLOCK =================================================
+
 $settings = (new Extend\Settings);
 
 foreach (array_merge($boolKeys, $effectKeys) as $key) {
     $settings->serializeToForum($attributeName($key), "$prefix.$key", 'boolval');
 }
 
-foreach (['back_to_top_icon', 'background', 'progress_bar_color', 'back_to_top_color', 'back_to_top_icon_color', 'scrollbar_color', 'click_spark_color'] as $key) {
+foreach ($plainKeys as $key) {
     $settings->serializeToForum($attributeName($key), "$prefix.$key");
 }
 
@@ -68,7 +104,7 @@ foreach ($jsonKeys as $key) {
     });
 }
 
-foreach (array_merge($boolKeys, $effectKeys, ['background', 'back_to_top_icon', 'progress_bar_color', 'back_to_top_color', 'back_to_top_icon_color', 'scrollbar_color', 'click_spark_color'], $jsonKeys) as $key) {
+foreach (array_merge($boolKeys, $effectKeys, $plainKeys, $jsonKeys) as $key) {
     $default = $defaultMap[$key] ?? false;
 
     if (in_array($key, $effectKeys, true)) {
