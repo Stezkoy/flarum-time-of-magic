@@ -3,6 +3,7 @@ import Switch from 'flarum/common/components/Switch';
 import { PREFIX, parseJsonArray, parseCustomConfig, isScheduleActive } from '../../common';
 import ScheduleModal from './ScheduleModal';
 import ConfirmModal from './ConfirmModal';
+import ColorField from './ColorField';
 
 const EFFECT_OPTIONS = [
   { value: 'snow', label: 'snow_label' },
@@ -338,12 +339,12 @@ export default class TimeOfMagicSettingsPage extends ExtensionPage {
   }
 
   _colorField(key, labelKey) {
-    return this.buildSettingComponent({
-      type: 'color-preview',
-      setting: key,
-      label: app.translator.trans(PREFIX + '.' + labelKey),
-      help: app.translator.trans(PREFIX + '.admin.color_description'),
-      placeholder: app.translator.trans(PREFIX + '.admin.color_placeholder'),
+    return m(ColorField, {
+      page: this,
+      key,
+      labelKey,
+      placeholderKey: 'admin.color_placeholder',
+      helpKey: 'admin.color_description',
     });
   }
 
