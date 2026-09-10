@@ -130,7 +130,7 @@ stezkoy-time-of-magic:
     cursor_dust_description: Occasional tiny glowing dots appear around the cursor.
     cursor_dust_color_label: Cursor dust color
     bg_parallax_label: Background parallax
-    bg_parallax_description: The background pattern subtly shifts following the cursor. Requires a background pattern.
+    bg_parallax_description: The background pattern subtly shifts following the cursor. Requires the Background pattern above.
     cursor_flashlight_label: Cursor flashlight
     cursor_flashlight_description: A soft dark overlay with a light spot around the cursor. Best on dark themes.
     starfield_label: Starfield

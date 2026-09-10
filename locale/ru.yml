@@ -130,7 +130,7 @@ stezkoy-time-of-magic:
     cursor_dust_description: Изредка вокруг курсора вспыхивают светящиеся точки.
     cursor_dust_color_label: Цвет пыли
     bg_parallax_label: Параллакс фона
-    bg_parallax_description: Фоновый узор слегка смещается за курсором. Требуется включённый фоновый узор.
+    bg_parallax_description: Фоновый паттерн слегка смещается за курсором. Требуется включённый «Фоновый паттерн» выше.
     cursor_flashlight_label: Фонарик курсора
     cursor_flashlight_description: Мягкая тёмная пальма со световым пятном у курсора. Лучше всего на тёмных темах.
     starfield_label: Звёздное небо
