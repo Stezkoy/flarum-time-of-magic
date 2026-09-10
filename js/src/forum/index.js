@@ -6,7 +6,7 @@ import { PREFIX, capitalize, parseJsonArray, parseCustomConfig, normalizeEffects
 import { FALLING_EFFECTS, createParticleLayer, renderParticles } from './fallingEffects';
 import { forumAttribute, userPreference, isInteractiveClick } from './util';
 import { initCursorTrail, initCursorDust, initCursorFlashlight, initClickBurst } from './cursorEffects';
-import { initAmbientEffect } from './ambientEffects';
+import { initAmbientEffect, initBackgroundParallax, initSiteTint } from './ambientEffects';
 
 
 const CSS_VARIABLES = {
@@ -223,6 +223,8 @@ app.initializers.add(PREFIX, () => {
   initScrollbar();
   initSwapLayout();
   initBackground();
+  if (forumAttribute('timeOfMagicBgParallax')) initBackgroundParallax();
+  if (forumAttribute('timeOfMagicSiteTint')) initSiteTint();
 
   if (forumAttribute('timeOfMagicProgressBar')) initProgressBar();
   if (forumAttribute('timeOfMagicBackToTop')) initBackToTop();

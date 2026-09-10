@@ -1,6 +1,5 @@
 {
   "name": "stezkoy/flarum-time-of-magic",
-  "version": "1.4.0",
   "description": "Adds a touch of magic to your Flarum site",
   "support": {
     "source": "https://github.com/Stezkoy/flarum-time-of-magic",
@@ -29,8 +28,8 @@
       "title": "Time of Magic",
       "category": "feature",
       "icon": {
-        "image": "icon.svg",
-        "backgroundColor": "#b58d5d"
+        "image": "fa-solid fa-wand-magic-sparkles",
+        "backgroundColor": "#00a185"
       }
     }
   }

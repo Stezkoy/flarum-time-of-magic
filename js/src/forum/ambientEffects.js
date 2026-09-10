@@ -1,4 +1,34 @@
+import { forumAttribute } from './util';
 import { rand } from './util';
+
+// Background parallax — subtle background shift following the cursor
+export function initBackgroundParallax() {
+  document.documentElement.classList.add('timeofmagic-bg-parallax');
+  let raf = null;
+
+  document.addEventListener('mousemove', (e) => {
+    if (raf) return;
+    raf = requestAnimationFrame(() => {
+      raf = null;
+      const x = (e.clientX / window.innerWidth - 0.5) * 30;
+      const y = (e.clientY / window.innerHeight - 0.5) * 30;
+      document.body.style.backgroundPosition = `${x.toFixed(1)}px ${y.toFixed(1)}px`;
+    });
+  });
+}
+
+// Site tint — translucent color overlay over the whole page
+export function initSiteTint() {
+  const color = String(forumAttribute('timeOfMagicSiteTintColor') ?? '');
+
+  if (!/^#(?:[0-9a-f]{3}|[0-9a-f]{6})$/i.test(color)) return;
+
+  const layer = document.createElement('div');
+  layer.id = 'timeofmagic-site-tint';
+  layer.setAttribute('aria-hidden', 'true');
+  layer.style.background = color;
+  document.body.appendChild(layer);
+}
 
 // Static starfield — twinkling fixed layer
 function initStarfield() {

@@ -128,6 +128,7 @@ stezkoy-time-of-magic:
     trail_items_label: Частицы следа (эмодзи/символы через пробел)
     cursor_dust_label: Пыль у курсора
     cursor_dust_description: Изредка вокруг курсора вспыхивают светящиеся точки.
+    cursor_dust_color_label: Цвет пыли
     bg_parallax_label: Параллакс фона
     bg_parallax_description: Фоновый узор слегка смещается за курсором. Требуется включённый фоновый узор.
     cursor_flashlight_label: Фонарик курсора
@@ -140,7 +141,7 @@ stezkoy-time-of-magic:
     fog_label: Туман
     fog_description: Медленно плывущие полупрозрачные пятна тумана.
     site_tint_label: Оттенок сайта
-    site_tint_description: Полупрозрачный цветовой слой поверх всей страницы.
+    site_tint_description: Полупрозрачный цветовой слой поверх всей страницы. Укажите цвет, чтобы активировать.
     site_tint_color_label: Цвет оттенка
 
   forum:

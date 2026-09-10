@@ -128,6 +128,7 @@ stezkoy-time-of-magic:
     trail_items_label: Trail particles (emoji/chars, space separated)
     cursor_dust_label: Cursor dust
     cursor_dust_description: Occasional tiny glowing dots appear around the cursor.
+    cursor_dust_color_label: Cursor dust color
     bg_parallax_label: Background parallax
     bg_parallax_description: The background pattern subtly shifts following the cursor. Requires a background pattern.
     cursor_flashlight_label: Cursor flashlight
@@ -140,7 +141,7 @@ stezkoy-time-of-magic:
     fog_label: Fog
     fog_description: Slow drifting translucent fog blobs.
     site_tint_label: Site tint
-    site_tint_description: Translucent color overlay across the whole page.
+    site_tint_description: Translucent color overlay across the whole page. Set the tint color to activate.
     site_tint_color_label: Tint color
   forum:
     effects_section_heading: Effects
