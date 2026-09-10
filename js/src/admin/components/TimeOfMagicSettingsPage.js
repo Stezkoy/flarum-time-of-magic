@@ -1,8 +1,8 @@
 import ExtensionPage from 'flarum/admin/components/ExtensionPage';
 import Switch from 'flarum/common/components/Switch';
+import { PREFIX, parseJsonArray, parseCustomConfig, isScheduleActive } from '../../common';
 import ScheduleModal from './ScheduleModal';
-
-const PREFIX = 'stezkoy-time-of-magic';
+import ConfirmModal from './ConfirmModal';
 
 const EFFECT_OPTIONS = [
   { value: 'snow', label: 'snow_label' },
@@ -33,9 +33,9 @@ const DENSITY_LABEL_MAP = {
 export default class TimeOfMagicSettingsPage extends ExtensionPage {
   oninit(vnode) {
     super.oninit(vnode);
-    this.schedules = this._parseSchedules(app.data.settings[PREFIX + '.schedules'] ?? '[]');
-    this.customUp = this._parseCustom(app.data.settings[PREFIX + '.custom_up'] ?? '{}');
-    this.customDown = this._parseCustom(app.data.settings[PREFIX + '.custom_down'] ?? '{}');
+    this.schedules = parseJsonArray(app.data.settings[PREFIX + '.schedules'] ?? '[]');
+    this.customUp = parseCustomConfig(app.data.settings[PREFIX + '.custom_up'] ?? '{}');
+    this.customDown = parseCustomConfig(app.data.settings[PREFIX + '.custom_down'] ?? '{}');
   }
 
   content() {
@@ -64,11 +64,12 @@ export default class TimeOfMagicSettingsPage extends ExtensionPage {
           'admin.back_to_top_label',
           'admin.back_to_top_description',
           this.setting(PREFIX + '.back_to_top', '')() === '1'
-            ? m('.TimeOfMagicSettings-indent', [
-                this._toggle(PREFIX + '.back_to_top_rounded', 'admin.back_to_top_shape_label', 'admin.back_to_top_shape_description'),
-                this._iconField(),
-                this._colorField(PREFIX + '.back_to_top_color', 'admin.back_to_top_color_label'),
-              ])
+              ? m('.TimeOfMagicSettings-indent', [
+                  this._toggle(PREFIX + '.back_to_top_rounded', 'admin.back_to_top_shape_label', 'admin.back_to_top_shape_description'),
+                  this._iconField(),
+                  this._colorField(PREFIX + '.back_to_top_color', 'admin.back_to_top_color_label'),
+                  this._colorField(PREFIX + '.back_to_top_icon_color', 'admin.back_to_top_icon_color_label'),
+                ])
             : null
         ),
 
@@ -153,7 +154,7 @@ export default class TimeOfMagicSettingsPage extends ExtensionPage {
   }
 
   _scheduleCard(schedule) {
-    const activeNow = this._isCurrentlyActive(schedule);
+    const activeNow = isScheduleActive(schedule);
     const effects = (schedule.effects || []).map((effect) =>
       typeof effect === 'string' ? { name: effect, density: null } : effect
     );
@@ -360,40 +361,6 @@ export default class TimeOfMagicSettingsPage extends ExtensionPage {
     });
   }
 
-  _parseSchedules(raw) {
-    if (Array.isArray(raw)) return raw;
-    if (typeof raw === 'string' && raw) {
-      try {
-        const parsed = JSON.parse(raw);
-        return Array.isArray(parsed) ? parsed : [];
-      } catch (e) {
-        return [];
-      }
-    }
-    return [];
-  }
-
-  _parseCustom(raw) {
-    let conf = {};
-
-    if (typeof raw === 'string' && raw) {
-      try {
-        conf = JSON.parse(raw);
-      } catch (e) {
-        conf = {};
-      }
-    } else if (raw && typeof raw === 'object') {
-      conf = raw;
-    }
-
-    const items = String(conf.items || '');
-    let count = parseInt(conf.count, 10);
-    if (Number.isNaN(count) || count < 1) count = 20;
-    count = Math.min(100, Math.max(1, count));
-
-    return { enabled: !!conf.enabled, items, count };
-  }
-
   _syncCustom(slot) {
     const conf = slot === 'up' ? this.customUp : this.customDown;
     this.setting(PREFIX + '.custom_' + slot)(JSON.stringify({ enabled: conf.enabled, items: conf.items, count: conf.count }));
@@ -429,20 +396,14 @@ export default class TimeOfMagicSettingsPage extends ExtensionPage {
   }
 
   _deleteSchedule(id) {
-    const message = app.translator.trans(PREFIX + '.admin.scheduler_delete_confirm', {}, true);
-    if (!window.confirm(message)) return;
-
-    this.schedules = this.schedules.filter((s) => s.id !== id);
-    this._syncSchedules();
-    m.redraw();
-  }
-
-  _isCurrentlyActive(schedule) {
-    const now = Date.now();
-    const start = new Date(schedule.start).getTime();
-    const end = new Date(schedule.end).getTime();
-
-    return !!schedule.enabled && !Number.isNaN(start) && !Number.isNaN(end) && now >= start && now <= end;
+    app.modal.show(ConfirmModal, {
+      text: app.translator.trans(PREFIX + '.admin.scheduler_delete_confirm'),
+      onConfirm: () => {
+        this.schedules = this.schedules.filter((s) => s.id !== id);
+        this._syncSchedules();
+        m.redraw();
+      },
+    });
   }
 
   _formatDate(dt) {

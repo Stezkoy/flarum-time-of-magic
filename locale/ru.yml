@@ -18,6 +18,7 @@ stezkoy-time-of-magic:
     back_to_top_shape_label: Квадратная форма
     back_to_top_shape_description: Использовать квадратную форму вместо круга.
     back_to_top_icon_label: Класс иконки FontAwesome
+    back_to_top_icon_color_label: Цвет иконки «Наверх»
     back_to_top_color_label: Цвет кнопки «Наверх»
     snow_label: Падающий снег
     snow_description: Добавляет праздничный эффект падающего снега на весь сайт.
@@ -112,6 +113,11 @@ stezkoy-time-of-magic:
     scheduler_edit_button: Редактировать запись
     scheduler_delete_button: Удалить запись
     scheduler_delete_confirm: Удалить это расписание?
+    scheduler_confirm_title: Подтверждение удаления
+    scheduler_confirm_button: Удалить
+    scheduler_validation_dates_required: Укажите дату начала и окончания.
+    scheduler_validation_end_before_start: Дата окончания должна быть позже даты начала.
+    scheduler_validation_effects_required: Выберите хотя бы один эффект.
     scheduler_modal_add_title: Добавить расписание
     scheduler_modal_edit_title: Редактировать расписание
     scheduler_modal_save: Сохранить

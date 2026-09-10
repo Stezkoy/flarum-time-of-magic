@@ -2,6 +2,83 @@
 
 use Flarum\Extend;
 
+$prefix = 'stezkoy-time-of-magic';
+
+$attributeName = function (string $key): string {
+    return 'timeOfMagic' . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
+};
+
+$boolKeys = [
+    'allow_user_disable',
+    'progress_bar',
+    'back_to_top',
+    'back_to_top_rounded',
+    'snow',
+    'scrollbar',
+    'swap_layout',
+    'click_spark',
+];
+
+$effectKeys = [
+    'snow',
+    'leaves',
+    'rain',
+    'petals',
+    'confetti',
+    'hearts',
+    'clovers',
+    'eggs',
+    'lanterns',
+    'fireflies',
+];
+
+$jsonKeys = ['schedules', 'custom_up', 'custom_down'];
+
+$defaultMap = [
+    'schedules' => '[]',
+    'custom_up' => '[]',
+    'custom_down' => '[]',
+    'back_to_top_icon' => 'fa-solid fa-arrow-up',
+    'allow_user_disable' => true,
+];
+
+$settings = (new Extend\Settings);
+
+foreach (array_merge($boolKeys, $effectKeys) as $key) {
+    $settings->serializeToForum($attributeName($key), "$prefix.$key", 'boolval');
+}
+
+foreach (['back_to_top_icon', 'background', 'progress_bar_color', 'back_to_top_color', 'back_to_top_icon_color', 'scrollbar_color', 'click_spark_color'] as $key) {
+    $settings->serializeToForum($attributeName($key), "$prefix.$key");
+}
+
+foreach ($effectKeys as $effect) {
+    $settings->serializeToForum($attributeName("{$effect}_density"), "$prefix.{$effect}_density");
+}
+
+foreach ($jsonKeys as $key) {
+    $settings->serializeToForum($attributeName($key), "$prefix.$key", function ($value) {
+        if (is_array($value)) {
+            return $value;
+        }
+
+        $decoded = json_decode((string) $value, true);
+
+        return is_array($decoded) ? $decoded : [];
+    });
+}
+
+foreach (array_merge($boolKeys, $effectKeys, ['background', 'back_to_top_icon', 'progress_bar_color', 'back_to_top_color', 'back_to_top_icon_color', 'scrollbar_color', 'click_spark_color'], $jsonKeys) as $key) {
+    $default = $defaultMap[$key] ?? false;
+
+    if (in_array($key, $effectKeys, true)) {
+        $settings->default("$prefix.{$key}", $default);
+        $settings->default("$prefix.{$key}_density", 'medium');
+    } else {
+        $settings->default("$prefix.$key", $default);
+    }
+}
+
 return [
     (new Extend\Frontend('forum'))
         ->js(__DIR__.'/js/dist/forum.js')
@@ -11,137 +88,7 @@ return [
         ->js(__DIR__.'/js/dist/admin.js')
         ->css(__DIR__.'/less/admin.less'),
 
-    (new Extend\Settings)
-        ->serializeToForum('timeOfMagicUserDisable', 'stezkoy-time-of-magic.allow_user_disable', function ($value) {
-            return (bool) $value;
-        })
-        ->serializeToForum('timeOfMagicProgressBar', 'stezkoy-time-of-magic.progress_bar', function ($value) {
-            return (bool) $value;
-        })
-        ->serializeToForum('timeOfMagicBackToTop', 'stezkoy-time-of-magic.back_to_top', function ($value) {
-            return (bool) $value;
-        })
-        ->serializeToForum('timeOfMagicBackToTopRounded', 'stezkoy-time-of-magic.back_to_top_rounded', function ($value) {
-            return (bool) $value;
-        })
-        ->serializeToForum('timeOfMagicBackToTopIcon', 'stezkoy-time-of-magic.back_to_top_icon')
-        ->serializeToForum('timeOfMagicSnow', 'stezkoy-time-of-magic.snow', function ($value) {
-            return (bool) $value;
-        })
-        ->serializeToForum('timeOfMagicSnowDensity', 'stezkoy-time-of-magic.snow_density')
-        ->serializeToForum('timeOfMagicScrollbar', 'stezkoy-time-of-magic.scrollbar', function ($value) {
-            return (bool) $value;
-        })
-        ->serializeToForum('timeOfMagicSwapLayout', 'stezkoy-time-of-magic.swap_layout', function ($value) {
-            return (bool) $value;
-        })
-        ->serializeToForum('timeOfMagicBackground', 'stezkoy-time-of-magic.background')
-        ->serializeToForum('timeOfMagicProgressBarColor', 'stezkoy-time-of-magic.progress_bar_color')
-        ->serializeToForum('timeOfMagicBackToTopColor', 'stezkoy-time-of-magic.back_to_top_color')
-        ->serializeToForum('timeOfMagicScrollbarColor', 'stezkoy-time-of-magic.scrollbar_color')
-        ->serializeToForum('timeOfMagicClickSpark', 'stezkoy-time-of-magic.click_spark', function ($value) {
-            return (bool) $value;
-        })
-        ->serializeToForum('timeOfMagicClickSparkColor', 'stezkoy-time-of-magic.click_spark_color')
-        ->serializeToForum('timeOfMagicLeaves', 'stezkoy-time-of-magic.leaves', function ($value) {
-            return (bool) $value;
-        })
-        ->serializeToForum('timeOfMagicLeavesDensity', 'stezkoy-time-of-magic.leaves_density')
-        ->serializeToForum('timeOfMagicRain', 'stezkoy-time-of-magic.rain', function ($value) {
-            return (bool) $value;
-        })
-        ->serializeToForum('timeOfMagicRainDensity', 'stezkoy-time-of-magic.rain_density')
-        ->serializeToForum('timeOfMagicPetals', 'stezkoy-time-of-magic.petals', function ($value) {
-            return (bool) $value;
-        })
-        ->serializeToForum('timeOfMagicPetalsDensity', 'stezkoy-time-of-magic.petals_density')
-        ->serializeToForum('timeOfMagicConfetti', 'stezkoy-time-of-magic.confetti', function ($value) {
-            return (bool) $value;
-        })
-        ->serializeToForum('timeOfMagicConfettiDensity', 'stezkoy-time-of-magic.confetti_density')
-        ->serializeToForum('timeOfMagicHearts', 'stezkoy-time-of-magic.hearts', function ($value) {
-            return (bool) $value;
-        })
-        ->serializeToForum('timeOfMagicHeartsDensity', 'stezkoy-time-of-magic.hearts_density')
-        ->serializeToForum('timeOfMagicClovers', 'stezkoy-time-of-magic.clovers', function ($value) {
-            return (bool) $value;
-        })
-        ->serializeToForum('timeOfMagicCloversDensity', 'stezkoy-time-of-magic.clovers_density')
-        ->serializeToForum('timeOfMagicEggs', 'stezkoy-time-of-magic.eggs', function ($value) {
-            return (bool) $value;
-        })
-        ->serializeToForum('timeOfMagicEggsDensity', 'stezkoy-time-of-magic.eggs_density')
-        ->serializeToForum('timeOfMagicLanterns', 'stezkoy-time-of-magic.lanterns', function ($value) {
-            return (bool) $value;
-        })
-        ->serializeToForum('timeOfMagicLanternsDensity', 'stezkoy-time-of-magic.lanterns_density')
-        ->serializeToForum('timeOfMagicFireflies', 'stezkoy-time-of-magic.fireflies', function ($value) {
-            return (bool) $value;
-        })
-        ->serializeToForum('timeOfMagicFirefliesDensity', 'stezkoy-time-of-magic.fireflies_density')
-        ->serializeToForum('timeOfMagicSchedules', 'stezkoy-time-of-magic.schedules', function ($value) {
-            if (is_array($value)) {
-                return $value;
-            }
-
-            $decoded = json_decode((string) $value, true);
-
-            return is_array($decoded) ? $decoded : [];
-        })
-        ->serializeToForum('timeOfMagicCustomUp', 'stezkoy-time-of-magic.custom_up', function ($value) {
-            if (is_array($value)) {
-                return $value;
-            }
-
-            $decoded = json_decode((string) $value, true);
-
-            return is_array($decoded) ? $decoded : [];
-        })
-        ->serializeToForum('timeOfMagicCustomDown', 'stezkoy-time-of-magic.custom_down', function ($value) {
-            if (is_array($value)) {
-                return $value;
-            }
-
-            $decoded = json_decode((string) $value, true);
-
-            return is_array($decoded) ? $decoded : [];
-        })
-        ->default('stezkoy-time-of-magic.progress_bar', false)
-        ->default('stezkoy-time-of-magic.progress_bar_color', '')
-        ->default('stezkoy-time-of-magic.back_to_top', false)
-        ->default('stezkoy-time-of-magic.back_to_top_rounded', false)
-        ->default('stezkoy-time-of-magic.back_to_top_icon', 'fa-solid fa-arrow-up')
-        ->default('stezkoy-time-of-magic.back_to_top_color', '')
-        ->default('stezkoy-time-of-magic.snow', false)
-        ->default('stezkoy-time-of-magic.snow_density', 'medium')
-        ->default('stezkoy-time-of-magic.scrollbar', false)
-        ->default('stezkoy-time-of-magic.scrollbar_color', '')
-        ->default('stezkoy-time-of-magic.swap_layout', false)
-        ->default('stezkoy-time-of-magic.background', '')
-        ->default('stezkoy-time-of-magic.click_spark', false)
-        ->default('stezkoy-time-of-magic.click_spark_color', '')
-        ->default('stezkoy-time-of-magic.leaves', false)
-        ->default('stezkoy-time-of-magic.leaves_density', 'medium')
-        ->default('stezkoy-time-of-magic.rain', false)
-        ->default('stezkoy-time-of-magic.rain_density', 'medium')
-        ->default('stezkoy-time-of-magic.petals', false)
-        ->default('stezkoy-time-of-magic.petals_density', 'medium')
-        ->default('stezkoy-time-of-magic.confetti', false)
-        ->default('stezkoy-time-of-magic.confetti_density', 'medium')
-        ->default('stezkoy-time-of-magic.hearts', false)
-        ->default('stezkoy-time-of-magic.hearts_density', 'medium')
-        ->default('stezkoy-time-of-magic.clovers', false)
-        ->default('stezkoy-time-of-magic.clovers_density', 'medium')
-        ->default('stezkoy-time-of-magic.eggs', false)
-        ->default('stezkoy-time-of-magic.eggs_density', 'medium')
-        ->default('stezkoy-time-of-magic.lanterns', false)
-        ->default('stezkoy-time-of-magic.lanterns_density', 'medium')
-        ->default('stezkoy-time-of-magic.fireflies', false)
-        ->default('stezkoy-time-of-magic.fireflies_density', 'medium')
-        ->default('stezkoy-time-of-magic.schedules', '[]')
-        ->default('stezkoy-time-of-magic.custom_up', '[]')
-        ->default('stezkoy-time-of-magic.custom_down', '[]')
-        ->default('stezkoy-time-of-magic.allow_user_disable', true),
+    $settings,
 
     (new Extend\User)
         ->registerPreference('disableEffects', 'boolval', false),

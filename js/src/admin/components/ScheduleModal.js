@@ -1,8 +1,7 @@
 import Modal from 'flarum/common/components/Modal';
 import Switch from 'flarum/common/components/Switch';
 import Checkbox from 'flarum/common/components/Checkbox';
-
-const PREFIX = 'stezkoy-time-of-magic';
+import { PREFIX } from '../../common';
 
 export default class ScheduleModal extends Modal {
   oninit(vnode) {
@@ -33,6 +32,10 @@ export default class ScheduleModal extends Modal {
   content() {
     return m('form', { onsubmit: (e) => this._save(e) }, [
       m('.Modal-body', [
+        this.error
+          ? m('.Alert.Alert--error', this.error)
+          : null,
+
         m('.Form-group', [
           m('label', app.translator.trans(PREFIX + '.admin.scheduler_title_label')),
           m('input.FormControl', {
@@ -132,6 +135,25 @@ export default class ScheduleModal extends Modal {
     ]);
   }
 
+  _validationError() {
+    if (!this.start || !this.end) {
+      return 'scheduler_validation_dates_required';
+    }
+
+    const start = new Date(this.start).getTime();
+    const end = new Date(this.end).getTime();
+
+    if (Number.isNaN(start) || Number.isNaN(end) || end <= start) {
+      return 'scheduler_validation_end_before_start';
+    }
+
+    if (!this.selectedEffects.length) {
+      return 'scheduler_validation_effects_required';
+    }
+
+    return null;
+  }
+
   _densityOptions() {
     return [
       m('option', { value: 'light' }, app.translator.trans(PREFIX + '.admin.density_light')),
@@ -142,6 +164,16 @@ export default class ScheduleModal extends Modal {
 
   _save(e) {
     e.preventDefault();
+
+    const errorKey = this._validationError();
+
+    if (errorKey) {
+      this.error = app.translator.trans(PREFIX + '.admin.' + errorKey);
+      m.redraw();
+      return;
+    }
+
+    this.error = null;
 
     const existing = this.attrs.schedule;
 
