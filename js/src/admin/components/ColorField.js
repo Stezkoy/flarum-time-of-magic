@@ -1,4 +1,4 @@
-import Component from 'flarum/common/components/Component';
+import Component from 'flarum/common/Component';
 import { PREFIX } from '../../common';
 
 const HEX_RE = /^#(?:[0-9a-f]{3}|[0-9a-f]{6})$/i;
