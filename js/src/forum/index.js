@@ -5,15 +5,15 @@ import FieldSet from 'flarum/common/components/FieldSet';
 import { PREFIX, capitalize, parseJsonArray, parseCustomConfig, normalizeEffects, isScheduleActive } from '../common';
 import { FALLING_EFFECTS, createParticleLayer, renderParticles } from './fallingEffects';
 import { forumAttribute, userPreference, isInteractiveClick } from './util';
+import { initCursorTrail, initCursorDust, initCursorFlashlight, initClickBurst } from './cursorEffects';
+import { initAmbientEffect } from './ambientEffects';
 
-// -- experimental block: remove this import + initExperimental() call to cut --
-import { initExperimental } from './experimental';
-// ---------------------------------------------------------------
 
 const CSS_VARIABLES = {
   progressBar: '--timeofmagic-accent-bar',
   backToTop: '--timeofmagic-accent-top',
   backToTopIcon: '--timeofmagic-accent-top-icon',
+  cursorDust: '--timeofmagic-accent-dust',
   scrollbar: '--timeofmagic-accent-scrollbar',
   clickSpark: '--timeofmagic-accent-spark',
 };
@@ -91,6 +91,7 @@ function applyMagicColors() {
     progressBar: forumAttribute('timeOfMagicProgressBarColor'),
     backToTop: forumAttribute('timeOfMagicBackToTopColor'),
     backToTopIcon: forumAttribute('timeOfMagicBackToTopIconColor'),
+    cursorDust: forumAttribute('timeOfMagicCursorDustColor'),
     scrollbar: forumAttribute('timeOfMagicScrollbarColor'),
     clickSpark: forumAttribute('timeOfMagicClickSparkColor'),
   }).forEach(([key, color]) => {
@@ -226,15 +227,19 @@ app.initializers.add(PREFIX, () => {
   if (forumAttribute('timeOfMagicProgressBar')) initProgressBar();
   if (forumAttribute('timeOfMagicBackToTop')) initBackToTop();
   if (forumAttribute('timeOfMagicClickSpark')) initClickSpark();
+  if (forumAttribute('timeOfMagicCursorTrail')) initCursorTrail();
+  if (forumAttribute('timeOfMagicCursorDust')) initCursorDust();
+  if (forumAttribute('timeOfMagicCursorFlashlight')) initCursorFlashlight();
+  if (forumAttribute('timeOfMagicClickBurst')) initClickBurst();
 
   if (effectsDisabled()) return;
 
-  // -- experimental block: remove this call to cut --
-  initExperimental();
-  // ------------------------------------------------
-
   Object.keys(FALLING_EFFECTS).forEach((kind) => {
     if (isEffectActive(kind)) initFallingEffect(kind);
+  });
+
+  ['fog', 'starfield'].forEach((kind) => {
+    if (isEffectActive(kind)) initAmbientEffect(kind);
   });
 
   ['up', 'down'].forEach((slot) => {

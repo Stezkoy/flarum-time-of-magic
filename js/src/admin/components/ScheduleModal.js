@@ -16,8 +16,9 @@ export default class ScheduleModal extends Modal {
     this.selectedEffects = (schedule ? schedule.effects : [])
       .map((effect) => {
         const name = typeof effect === 'string' ? effect : effect.name;
-        const custom = this.attrs.effects.some((o) => o.value === name && o.custom);
-        return { name, density: custom ? null : (typeof effect === 'object' && effect.density ? effect.density : 'medium') };
+        const option = this.attrs.effects.find((o) => o.value === name);
+        const noDensity = option && (option.custom || option.noDensity);
+        return { name, density: noDensity ? null : (typeof effect === 'object' && effect.density ? effect.density : 'medium') };
       });
   }
 
@@ -111,7 +112,7 @@ export default class ScheduleModal extends Modal {
           state: !!selected,
           onchange: (checked) => {
             if (checked) {
-              this.selectedEffects.push({ name: effect.value, density: effect.custom ? null : 'medium' });
+              this.selectedEffects.push({ name: effect.value, density: effect.custom || effect.noDensity ? null : 'medium' });
             } else {
               this.selectedEffects = this.selectedEffects.filter((x) => x.name !== effect.value);
             }
@@ -120,7 +121,7 @@ export default class ScheduleModal extends Modal {
         },
         app.translator.trans(PREFIX + '.admin.' + effect.label)
       ),
-      effect.custom
+      effect.custom || effect.noDensity
         ? null
         : m('select.FormControl.TimeOfMagicModal-density' + (selected ? '' : '.is-disabled'), {
             disabled: !selected,

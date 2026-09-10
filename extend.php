@@ -17,6 +17,12 @@ $boolKeys = [
     'scrollbar',
     'swap_layout',
     'click_spark',
+    'cursor_trail',
+    'cursor_dust',
+    'cursor_flashlight',
+    'click_burst',
+    'bg_parallax',
+    'site_tint',
 ];
 
 $effectKeys = [
@@ -30,6 +36,8 @@ $effectKeys = [
     'eggs',
     'lanterns',
     'fireflies',
+    'fog',
+    'starfield',
 ];
 
 $jsonKeys = ['schedules', 'custom_up', 'custom_down'];
@@ -42,6 +50,10 @@ $plainKeys = [
     'back_to_top_icon_color',
     'scrollbar_color',
     'click_spark_color',
+    'cursor_dust_color',
+    'trail_items',
+    'click_burst_items',
+    'site_tint_color',
 ];
 
 $defaultMap = [
@@ -50,33 +62,12 @@ $defaultMap = [
     'custom_down' => '[]',
     'back_to_top_icon' => 'fa-solid fa-arrow-up',
     'allow_user_disable' => true,
-];
-
-// === EXPERIMENTAL BLOCK ========================================================
-// Cut this block (plus js/src/forum/experimental.js, its import/init call in
-// js/src/forum/index.js, the admin "_experimental..." section and the related
-// LESS/locale keys) to remove the experimental effects.
-$experimentalKeys = [
-    'cursor_trail',
-    'cursor_dust',
-    'bg_parallax',
-    'cursor_flashlight',
-    'starfield',
-    'click_burst',
-    'fog',
-    'site_tint',
-];
-
-$experimentalPlain = [
     'trail_items' => '✦ ✨',
     'click_burst_items' => '✨ 💥 ⭐',
+    'cursor_dust_color' => '',
     'site_tint_color' => '',
 ];
 
-$boolKeys = [...$boolKeys, ...$experimentalKeys];
-$plainKeys = [...$plainKeys, ...array_keys($experimentalPlain)];
-$defaultMap = [...$defaultMap, ...$experimentalPlain];
-// === END OF EXPERIMENTAL BLOCK =================================================
 
 $settings = (new Extend\Settings);
 
