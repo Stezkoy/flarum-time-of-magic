@@ -9,9 +9,15 @@ export function initBackgroundParallax() {
     if (raf) return;
     raf = requestAnimationFrame(() => {
       raf = null;
-      const x = (e.clientX / window.innerWidth - 0.5) * 30;
-      const y = (e.clientY / window.innerHeight - 0.5) * 30;
-      document.body.style.backgroundPosition = `${x.toFixed(1)}px ${y.toFixed(1)}px`;
+      const x = ((e.clientX / window.innerWidth - 0.5) * 30).toFixed(1);
+      const y = ((e.clientY / window.innerHeight - 0.5) * 30).toFixed(1);
+
+      if (document.body.classList.contains('timeofmagic-bg-hexagon')) {
+        document.body.style.setProperty('--timeofmagic-parallax-x', `${x}px`);
+        document.body.style.setProperty('--timeofmagic-parallax-y', `${y}px`);
+      } else {
+        document.body.style.backgroundPosition = `${x}px ${y}px`;
+      }
     });
   });
 }
