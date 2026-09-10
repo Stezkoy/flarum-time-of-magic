@@ -28,8 +28,9 @@
       "title": "Time of Magic",
       "category": "feature",
       "icon": {
-        "image": "fa-solid fa-wand-magic-sparkles",
-        "backgroundColor": "#00a185"
+        "name": "fa-solid fa-wand-magic-sparkles",
+        "backgroundColor": "#00a185",
+        "color": "#fff"
       }
     }
   }
